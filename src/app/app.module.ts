@@ -1,20 +1,23 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { AppOrderComponent } from './order-app/order';
+
+import { OrderFormComponent } from './order-cmp/order-form';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AppOrderComponent,
+    OrderFormComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule
+    ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, AppOrderComponent]
 })
 export class AppModule { }
