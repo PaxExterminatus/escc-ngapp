@@ -1,0 +1,34 @@
+<h1>Order Form</h1>
+<form [formGroup]="orderForm" novalidate>
+  <div class="form-group">
+    <label class="center-block">Имя</label>
+    <input
+      type="text"
+      formControlName="clientNameFirst"
+      class="form-control"
+    >
+
+    <label class="center-block">Фамилия</label>
+    <input
+      type="text"
+      formControlName="clientNameLast"
+      class="form-control"
+    >
+
+    <label class="center-block">Телефон</label>
+    <input
+      type="text"
+      formControlName="clientPhone"
+      class="form-control"
+    >
+
+    <label class="center-block">E-mail</label>
+    <input
+      type="text"
+      formControlName="clientEmail"
+      class="form-control"
+    >
+  </div>
+</form>
+<p>Form value: {{ orderForm.value | json }}</p>
+<p>Form status: {{ orderForm.status | json }}</p>
