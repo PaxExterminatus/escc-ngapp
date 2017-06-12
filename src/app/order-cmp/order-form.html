@@ -1,6 +1,14 @@
-<h1>Order Form</h1>
+<h1>Order Form ({{formType}})</h1>
 <form [formGroup]="orderForm" novalidate>
   <div class="form-group">
+    <label class="center-block">Курс</label>
+    <select
+      formControlName="course"
+      class="form-control"
+    >
+      <option *ngFor="let courseEl of courseArr" value="{{courseEl}}" >{{courseEl}}</option>
+    </select>
+
     <label class="center-block">Имя</label>
     <input
       type="text"
