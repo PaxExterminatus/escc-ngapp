@@ -4,32 +4,44 @@
     <label class="center-block">Курс</label>
     <select
       formControlName="course"
-      class="form-control"
-    >
-      <option *ngFor="let courseEl of courseArr" value="{{courseEl}}" >{{courseEl}}</option>
+      class="form-control">
+      <option
+        *ngFor="let course of courseArr"
+        [ngValue]="course"
+      >
+        {{course.name}}
+      </option>
     </select>
+  </div>
 
+  <div class="form-group">
     <label class="center-block">Имя</label>
     <input
       type="text"
       formControlName="clientNameFirst"
       class="form-control"
     >
+  </div>
 
+  <div class="form-group">
     <label class="center-block">Фамилия</label>
     <input
       type="text"
       formControlName="clientNameLast"
       class="form-control"
     >
+  </div>
 
+  <div class="form-group">
     <label class="center-block">Телефон</label>
     <input
       type="text"
       formControlName="clientPhone"
       class="form-control"
     >
+  </div>
 
+  <div class="form-group">
     <label class="center-block">E-mail</label>
     <input
       type="text"
@@ -37,6 +49,16 @@
       class="form-control"
     >
   </div>
+
+  <div class="checkbox">
+    <label class="center-block">
+      <input
+        type="checkbox"
+        formControlName="agreeRules"
+      >Согласиться с правилами
+    </label>
+  </div>
+
 </form>
 <p>Form value: {{ orderForm.value | json }}</p>
 <p>Form status: {{ orderForm.status | json }}</p>

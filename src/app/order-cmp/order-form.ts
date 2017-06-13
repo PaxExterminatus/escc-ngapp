@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { courseArr } from '../order-model/order';
+import { CourseArr, CourseClass } from '../order-model/order';
 
 @Component({
   selector: 'app-order-form',
@@ -9,10 +9,11 @@ import { courseArr } from '../order-model/order';
 })
 
 export class OrderFormComponent {
-  courseArr = courseArr;
+  courseArr = CourseArr;
+
   formType = 'etl_short';
   orderForm: FormGroup;
-
+  @Input() defaultCourse: number;
   constructor(private fb: FormBuilder) {
     this.createOrderForm();
   }
@@ -32,11 +33,12 @@ export class OrderFormComponent {
 }
 
 const etl_short = {
-  course: ['', Validators.required],
+  course: [, Validators.required],
   clientNameFirst: ['', Validators.required],
   clientNameLast: ['', Validators.required],
   clientPhone: ['', Validators.required],
   clientEmail: ['', Validators.required],
+  agreeRules: [true, Validators.required],
 }
 
 const etl_normal = {
