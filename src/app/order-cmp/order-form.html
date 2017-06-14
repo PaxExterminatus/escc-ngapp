@@ -1,8 +1,11 @@
 <h1>Order Form ({{formType}})</h1>
 <form [formGroup]="orderForm" novalidate>
+
+  <img width="100" src="http://admin.eshko.by/lp2/img/{{orderForm.value.course.source}}.jpg">
   <div class="form-group">
     <label class="center-block">Курс</label>
     <select
+      [ngModel]="courseArr[defaultCourse]"
       formControlName="course"
       class="form-control">
       <option
@@ -62,3 +65,5 @@
 </form>
 <p>Form value: {{ orderForm.value | json }}</p>
 <p>Form status: {{ orderForm.status | json }}</p>
+
+orderForm.value.course.source: {{ orderForm.value.course.source }}<br>

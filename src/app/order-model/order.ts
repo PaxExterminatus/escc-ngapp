@@ -10,3 +10,9 @@ export const CourseArr: CourseClass[] = [
   {id: 3, name: 'FRA', source: 'fra'},
   {id: 4, name: 'DEU', source: 'deu'},
 ]
+
+export class ClientNameClass {
+  first: string;
+  last: string;
+  middle: string;
+}

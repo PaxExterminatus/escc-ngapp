@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { CourseArr, CourseClass } from '../order-model/order';
@@ -8,18 +8,20 @@ import { CourseArr, CourseClass } from '../order-model/order';
   templateUrl: './order-form.html'
 })
 
-export class OrderFormComponent {
+export class OrderFormComponent implements OnInit {
   courseArr = CourseArr;
-
-  formType = 'etl_short';
+  @Input() defaultCourse;
+  @Input() formType;
   orderForm: FormGroup;
-  @Input() defaultCourse: number;
-  constructor(private fb: FormBuilder) {
-    this.createOrderForm();
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit() {
+    this.createOrderForm(this.formType);
   }
 
-  createOrderForm() {
-    switch (this.formType) {
+  createOrderForm(formType: string) {
+    switch (formType) {
       case 'etl_short':
         this.orderForm = this.fb.group(etl_short);
         break;
