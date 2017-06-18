@@ -23,6 +23,11 @@ export class OrderFormComponent implements OnInit {
     this.createOrderForm(this.formType);
   }
 
+  OnSubmit(modelFormHtml: any) {
+    modelFormHtml.submit();
+    console.log('1');
+  }
+
   createOrderForm(formType: string) {
     switch (formType) {
       case 'etl_short':
