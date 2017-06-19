@@ -1,19 +1,27 @@
 <h1>Order Form ({{formType}})</h1>
 <form
-  action="http://localhost:8080/esccapp/tst/submit.jsp"
-  method="post"
+  action="http://dev.office.eshko.net:8080/esccapp/tst/submit.jsp"
+  method="get"
+  (submit)="onSubmit(OrderHTMLForm)"
   target="_blank"
   [formGroup]="orderForm"
-  #modelFormHtml
+  #OrderHTMLForm
   novalidate>
 
-  <div class="form-group" *ngIf="orderForm.value.hasOwnProperty('course')">
-    <!--<img width="100" src="http://admin.eshko.by/lp2/img/{{orderForm.value.course.source}}.jpg">-->
+  <div class="form-group">
+    <!--course source block -->
+    <div *ngIf="courseObj.hasOwnProperty('source')">
+      <img width="100" src="http://admin.eshko.by/lp2/img/{{courseObj.source}}.jpg">
+      <p>Обычная цена {{courseObj.price}}, цена для вас {{courseObj.sale}}</p>
+    </div>
+
     <label class="center-block">Курс</label>
     <select
+      name="course"
       formControlName="course"
-      name="curs"
-      class="form-control">
+      class="form-control"
+      (change)="onChange($event.target.value)"
+    >
       <option
         *ngFor="let course of courseArr"
         [value]="course.id"
@@ -27,8 +35,8 @@
     <label class="center-block">Имя</label>
     <input
       type="text"
-      formControlName="clientNameFirst"
       name="iname"
+      formControlName="clientNameFirst"
       class="form-control"
     >
   </div>
@@ -37,6 +45,7 @@
     <label class="center-block">Фамилия</label>
     <input
       type="text"
+      name="fname"
       formControlName="clientNameLast"
       class="form-control">
   </div>
@@ -45,6 +54,7 @@
     <label class="center-block">Отчество</label>
     <input
       type="text"
+      name="mname"
       formControlName="clientNameMiddle"
       class="form-control">
   </div>
@@ -53,6 +63,7 @@
     <label class="center-block">Телефон</label>
     <input
       type="text"
+      name="phone"
       formControlName="clientPhone"
       class="form-control">
   </div>
@@ -61,6 +72,7 @@
     <label class="center-block">E-mail</label>
     <input
       type="text"
+      name="email"
       formControlName="clientEmail"
       class="form-control">
   </div>
@@ -69,13 +81,14 @@
     <label class="center-block">
       <input
         type="checkbox"
+        name="agree"
         formControlName="agreeRules">Согласиться с правилами
     </label>
   </div>
   <button
-    (click)="OnSubmit(modelFormHtml)"
     class="btn btn-success">Скачать пробный урок</button>
 
 </form>
 <p>Form value: {{ orderForm.value | json }}</p>
 <p>Form status: {{ orderForm.status | json }}</p>
+<p>HTMLFormElement: {{ OrderHTMLFormElement | json }}</p>

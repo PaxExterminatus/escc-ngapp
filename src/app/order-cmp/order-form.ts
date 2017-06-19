@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Http, RequestOptions, URLSearchParams } from '@angular/http';
+import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 
 import { CourseArr, CourseClass } from '../order-model/order';
 
@@ -10,22 +9,23 @@ import { CourseArr, CourseClass } from '../order-model/order';
 })
 
 export class OrderFormComponent implements OnInit {
-  apiUrl = 'http://localhost:8080/esccapp/tst/submit.jsp';
-
   courseArr = CourseArr;
-  @Input() defaultCourse;
-  @Input() formType;
+  courseObj = new CourseClass();
   orderForm: FormGroup;
+  @Input() formType;
 
-  constructor(private fb: FormBuilder, public http: Http) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.createOrderForm(this.formType);
   }
 
-  OnSubmit(modelFormHtml: any) {
-    modelFormHtml.submit();
-    console.log('1');
+  onSubmit(HTMLForm: HTMLFormElement) {
+    HTMLForm.submit();
+  }
+
+  onChange(e: any) {
+    this.courseObj = this.courseArr.find(course => course.id === +e);
   }
 
   createOrderForm(formType: string) {
