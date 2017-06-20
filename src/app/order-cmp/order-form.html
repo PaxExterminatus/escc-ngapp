@@ -1,4 +1,4 @@
-<h1>Order Form ({{formType}})</h1>
+<h1>{{formDescH1}}</h1>
 <form
   action="http://dev.office.eshko.net:8080/esccapp/tst/submit.jsp"
   method="get"
@@ -20,7 +20,7 @@
       name="course"
       formControlName="course"
       class="form-control"
-      (change)="onChange($event.target.value)"
+      (change)="onChangeCourse($event.target.value)"
     >
       <option
         *ngFor="let course of courseArr"
@@ -29,6 +29,7 @@
         {{course.name}}
       </option>
     </select>
+    <p>course status: {{ orderForm.get('course').status }} </p>
   </div>
 
   <div class="form-group">
@@ -39,6 +40,7 @@
       formControlName="clientNameFirst"
       class="form-control"
     >
+    <p>clientNameFirst status: {{ orderForm.get('clientNameFirst').status }} </p>
   </div>
 
   <div class="form-group">
@@ -48,6 +50,7 @@
       name="fname"
       formControlName="clientNameLast"
       class="form-control">
+    <p>clientNameLast status: {{ orderForm.get('clientNameLast').status }} </p>
   </div>
 
   <div class="form-group" *ngIf="orderForm.value.hasOwnProperty('clientNameMiddle')">
@@ -57,6 +60,7 @@
       name="mname"
       formControlName="clientNameMiddle"
       class="form-control">
+    <p>clientNameMiddle status: {{ orderForm.get('clientNameMiddle').status }} </p>
   </div>
 
   <div class="form-group">
@@ -66,6 +70,7 @@
       name="phone"
       formControlName="clientPhone"
       class="form-control">
+    <p>clientPhone status: {{ orderForm.get('clientPhone').status }} </p>
   </div>
 
   <div class="form-group">
@@ -75,6 +80,7 @@
       name="email"
       formControlName="clientEmail"
       class="form-control">
+    <p>clientEmail status: {{ orderForm.get('clientEmail').status }} </p>
   </div>
 
   <div class="checkbox">
@@ -86,9 +92,17 @@
     </label>
   </div>
   <button
-    class="btn btn-success">Скачать пробный урок</button>
+    class="btn btn-success">{{formDescSubmit}}</button>
 
 </form>
 <p>Form value: {{ orderForm.value | json }}</p>
 <p>Form status: {{ orderForm.status | json }}</p>
-<p>HTMLFormElement: {{ OrderHTMLFormElement | json }}</p>
+
+<p>clientEmail value: {{ orderForm.value.clientEmail }} </p>
+<p>clientEmail status: {{ orderForm.get('clientEmail').value }} </p>
+<p>clientEmail status: {{ orderForm.get('clientEmail').status }} </p>
+<p>clientEmail pristine: {{ orderForm.get('clientEmail').pristine }} </p>
+<p>clientEmail dirty: {{ orderForm.get('clientEmail').dirty }} </p>
+<p>clientEmail untouched: {{ orderForm.get('clientEmail').untouched }} </p>
+<p>clientEmail touched: {{ orderForm.get('clientEmail').touched }} </p>
+
