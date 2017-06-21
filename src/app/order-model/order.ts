@@ -1,3 +1,5 @@
+import {Validators} from '@angular/forms';
+
 export class CourseClass {
   id: number;
   name: string;
@@ -12,3 +14,28 @@ export const CourseArr: CourseClass[] = [
   {id: 3, name: 'FRA', source: 'fra', price: 52.10, sale: 32.20},
   {id: 4, name: 'DEU', source: 'deu', price: 53.10, sale: 33.20},
 ]
+
+export const ValidatorRule = {
+  nameMinLength: 3,
+  nameMaxLength: 25,
+  phoneMinLength: 11,
+  phoneMaxLength: 12,
+  emailMinLength: 6
+}
+
+export const ValidatorArr = {
+  name: [
+    Validators.required,
+    Validators.minLength(ValidatorRule.nameMinLength),
+    Validators.maxLength(ValidatorRule.nameMaxLength),
+  ],
+  phone: [
+    Validators.required,
+    Validators.minLength(ValidatorRule.phoneMinLength),
+    Validators.maxLength(ValidatorRule.phoneMaxLength)
+  ],
+  email: [
+    Validators.required,
+    Validators.minLength(ValidatorRule.emailMinLength),
+  ]
+}

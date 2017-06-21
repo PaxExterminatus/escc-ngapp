@@ -2,11 +2,11 @@
 <form
   action="http://dev.office.eshko.net:8080/esccapp/tst/submit.jsp"
   method="get"
-  (submit)="onSubmit(OrderHTMLForm)"
   target="_blank"
+  novalidate
+  (submit)="onSubmit(OrderHTMLForm)"
   [formGroup]="orderForm"
-  #OrderHTMLForm
-  novalidate>
+  #OrderHTMLForm>
 
   <div class="form-group">
     <!--course source block -->
@@ -33,14 +33,19 @@
   </div>
 
   <div class="form-group">
-    <label class="center-block">Имя</label>
+    <label class="center-block" for="iname">Имя</label>
     <input
       type="text"
-      name="iname"
+      name="iname" id="iname"
       formControlName="clientNameFirst"
       class="form-control"
+      [value] = orderForm.value.clientNameFirst
     >
-    <p>clientNameFirst status: {{ orderForm.get('clientNameFirst').status }} </p>
+    <p
+      *ngIf="formErrors.clientNameFirst"
+      class="alert alert-danger">
+      {{formErrors.clientNameFirst}}
+    </p>
   </div>
 
   <div class="form-group">
@@ -97,12 +102,3 @@
 </form>
 <p>Form value: {{ orderForm.value | json }}</p>
 <p>Form status: {{ orderForm.status | json }}</p>
-
-<p>clientEmail value: {{ orderForm.value.clientEmail }} </p>
-<p>clientEmail status: {{ orderForm.get('clientEmail').value }} </p>
-<p>clientEmail status: {{ orderForm.get('clientEmail').status }} </p>
-<p>clientEmail pristine: {{ orderForm.get('clientEmail').pristine }} </p>
-<p>clientEmail dirty: {{ orderForm.get('clientEmail').dirty }} </p>
-<p>clientEmail untouched: {{ orderForm.get('clientEmail').untouched }} </p>
-<p>clientEmail touched: {{ orderForm.get('clientEmail').touched }} </p>
-
