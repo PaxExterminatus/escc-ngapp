@@ -17,10 +17,7 @@ export class OrderFormComponent implements OnInit {
   orderForm: FormGroup;
   @Input() formType;
 
-  formErrors = {
-    'clientNameFirst': '',
-    'clientNameLast': ''
-  };
+  formErrors;
 
   validationMessages = {
     clientNameFirst: {
@@ -73,16 +70,28 @@ export class OrderFormComponent implements OnInit {
   }
 
   onValueChanged(data?: any) {
+    // field - имена полей объекта formErrors перебераемые в цикле
+    // control - FormControl
+    // messages - validationMessages field Объект
+    // key - control.errors - Список ошибок которые возможны в FormControl
+
+    this.formErrors = {
+      clientNameFirst: '',
+      clientNameLast: ''
+    };
+
+    for (const x in this.orderForm.controls) {
+      console.log(x);
+    }
+
     if (!this.orderForm) { return; }
-    const form = this.orderForm;
 
     for (const field in this.formErrors) {
-      // clear previous error message (if any)
-      this.formErrors[field] = '';
-      const control = form.get(field);
+      this.formErrors[field] = ''; // Оброщаемся к полям объекта formErrors по их имени и делаем их пустыми
+      const control = this.orderForm.get(field); // Находим FormControl в FormGroup, по имени и засовываем его в переменную control
 
-      if (control && control.dirty && !control.valid) {
-        const messages = this.validationMessages[field];
+      if (control && control.dirty && !control.valid) { // Если есть FormControl, если пользователь ввел данные и если они НЕ верны
+        const messages = this.validationMessages[field];  // Получаем сообщение
         for (const key in control.errors) {
           this.formErrors[field] += messages[key] + ' ';
         }
