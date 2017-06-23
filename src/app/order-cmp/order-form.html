@@ -34,6 +34,7 @@
 
   <div class="form-group">
     <label class="center-block" for="iname">Имя</label>
+    <p *ngIf="formErrors.clientNameFirst">{{formErrors.clientNameFirst}}</p>
     <input
       type="text"
       name="iname" id="iname"
@@ -41,11 +42,7 @@
       class="form-control"
       [value] = orderForm.value.clientNameFirst
     >
-    <p
-      *ngIf="formErrors.clientNameFirst"
-      class="alert alert-danger">
-      {{formErrors.clientNameFirst}}
-    </p>
+
   </div>
 
   <div class="form-group">
@@ -55,7 +52,10 @@
       name="fname"
       formControlName="clientNameLast"
       class="form-control">
-    <p>clientNameLast status: {{ orderForm.get('clientNameLast').status }} </p>
+    <p class="alert alert-danger"
+       *ngIf="formErrors.clientNameLast">
+      {{formErrors.clientNameLast}}
+    </p>
   </div>
 
   <div class="form-group" *ngIf="orderForm.value.hasOwnProperty('clientNameMiddle')">
@@ -75,7 +75,10 @@
       name="phone"
       formControlName="clientPhone"
       class="form-control">
-    <p>clientPhone status: {{ orderForm.get('clientPhone').status }} </p>
+    <p class="alert alert-danger"
+       *ngIf="formErrors.clientPhone">
+      {{formErrors.clientPhone}}
+    </p>
   </div>
 
   <div class="form-group">

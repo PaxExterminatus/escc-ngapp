@@ -17,23 +17,7 @@ export class OrderFormComponent implements OnInit {
   orderForm: FormGroup;
   @Input() formType;
 
-  formErrors = {
-    clientNameFirst: '',
-    clientNameLast: ''
-  };
-
-  validationMessages = {
-    clientNameFirst: {
-      required:      'clientNameFirst - Name is required.',
-      minlength:     'clientNameFirst - Name must be at least 4 characters long.',
-      maxlength:     'clientNameFirst - Name cannot be more than 24 characters long.'
-    },
-    clientNameLast: {
-      required:      'clientNameLast - Name is required.',
-      minlength:     'clientNameLast - Name must be at least 4 characters long.',
-      maxlength:     'clientNameLast - Name cannot be more than 24 characters long.'
-    }
-  };
+  formErrors: any = new Object();
 
   constructor(private fb: FormBuilder) {}
 
@@ -68,45 +52,43 @@ export class OrderFormComponent implements OnInit {
       default:
         break;
     }
-    this.orderForm.valueChanges.subscribe(data => this.onValueChanged(data)); // Подписка на данные
-    this.onValueChanged(); // Сброс сообщений
+    this.orderForm.valueChanges.subscribe(data => this.onValueChanged()); // Подписка на данные
   }
 
-  onValueChanged(data?: any) {
-    if (!this.orderForm) { return; }
-    const form = this.orderForm;
-
-    for (const field in this.formErrors) {
-      // clear previous error message (if any)
-      this.formErrors[field] = '';
-      const control = form.get(field);
-
-      if (control && control.dirty && !control.valid) {
-        const messages = this.validationMessages[field];
-        for (const key in control.errors) {
-          this.formErrors[field] += messages[key] + ' ';
+  formCheck() {
+    this.formErrors = new Object();
+    for (const vField in ValidatorArr) {
+      const formControlObj = this.orderForm.get(vField);
+      if (formControlObj) {
+        if (!formControlObj.valid && formControlObj.dirty) {
+          for (const error in formControlObj.errors)
+            this.formErrors[vField] = ValidatorArr[vField].ErrorMessage[error];
         }
       }
     }
   }
 
+  onValueChanged() {
+    this.formCheck();
+  }
+
 }
 
 const etl_short = {
-  course: [, [Validators.required]],
-  clientNameFirst: ['', ValidatorArr.name],
-  clientNameLast: ['', ValidatorArr.name],
-  clientPhone: ['', ValidatorArr.phone],
-  clientEmail: ['', ValidatorArr.email],
-  agreeRules: [true, [Validators.required]],
+  course: [, ValidatorArr.course.RulesArr],
+  clientNameFirst: ['', ValidatorArr.clientNameFirst.RulesArr],
+  clientNameLast: ['', ValidatorArr.clientNameLast.RulesArr],
+  clientPhone: ['', ValidatorArr.clientPhone.RulesArr],
+  clientEmail: ['', ValidatorArr.clientEmail.RulesArr],
+  agreeRules: [true, ValidatorArr.agreeRules.RulesArr],
 }
 
 const etl_normal = {
-  course: [, Validators.required],
-  clientNameFirst: ['', ValidatorArr.name],
-  clientNameLast: ['', ValidatorArr.name],
+  course: [, ValidatorArr.course.RulesArr],
+  clientNameFirst: ['', ValidatorArr.clientNameFirst.RulesArr],
+  clientNameLast: ['', ValidatorArr.clientNameLast.RulesArr],
   clientNameMiddle: ['', ],
-  clientPhone: ['', ValidatorArr.phone],
-  clientEmail: ['', ValidatorArr.email],
-  agreeRules: [true, Validators.required],
+  clientPhone: ['', ValidatorArr.clientPhone.RulesArr],
+  clientEmail: ['', ValidatorArr.clientEmail.RulesArr],
+  agreeRules: [true, ValidatorArr.agreeRules.RulesArr],
 }
