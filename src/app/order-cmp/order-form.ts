@@ -18,8 +18,8 @@ export class OrderFormComponent implements OnInit {
   @Input() formType;
 
   formErrors = {
-    'clientNameFirst': '',
-    'clientNameLast': ''
+    clientNameFirst: '',
+    clientNameLast: ''
   };
 
   validationMessages = {
@@ -37,8 +37,8 @@ export class OrderFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {}
 
-  ngOnInit() {
-    this.createOrderForm(this.formType);
+  onChangeCourse(e: any) {
+    this.courseObj = this.courseArr.find(course => course.id === +e);
   }
 
   onSubmit(HTMLForm: HTMLFormElement) {
@@ -49,8 +49,8 @@ export class OrderFormComponent implements OnInit {
     }
   }
 
-  onChangeCourse(e: any) {
-    this.courseObj = this.courseArr.find(course => course.id === +e);
+  ngOnInit() {
+    this.createOrderForm(this.formType);
   }
 
   createOrderForm(formType: string) {
@@ -68,8 +68,8 @@ export class OrderFormComponent implements OnInit {
       default:
         break;
     }
-    this.orderForm.valueChanges.subscribe(data => this.onValueChanged(data));
-    this.onValueChanged();
+    this.orderForm.valueChanges.subscribe(data => this.onValueChanged(data)); // Подписка на данные
+    this.onValueChanged(); // Сброс сообщений
   }
 
   onValueChanged(data?: any) {
