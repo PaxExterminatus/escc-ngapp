@@ -15,7 +15,7 @@ export const CourseArr: CourseClass[] = [
   {id: 4, name: 'DEU', source: 'deu', price: 53.10, sale: 33.20},
 ]
 
-export const ValidatorRule = {
+export const RuleParam = {
   nameMinLength: 3,
   nameMaxLength: 25,
   phoneMinLength: 9,
@@ -23,78 +23,58 @@ export const ValidatorRule = {
   emailMinLength: 6
 }
 
-export const ValidatorArr = {
+export const RuleArr = {
   course: {
-    RulesArr: [
-      Validators.required
-    ],
+    RuleValidator: [Validators.required],
     ErrorMessage: {
-      required: 'Обязательно, выберите курс'
-    }
-  },
+      required: 'Обязательно выберите курс'}},
   clientNameFirst: {
-    RulesArr: [
+    RuleValidator: [
       Validators.required,
-      Validators.minLength(ValidatorRule.nameMinLength),
-      Validators.maxLength(ValidatorRule.nameMaxLength)],
+      Validators.minLength(RuleParam.nameMinLength),
+      Validators.maxLength(RuleParam.nameMaxLength)],
     ErrorMessage: {
-      required: 'Пожалуйста, обязательно, укажите ваще имя',
-      minlength: `Минимальное количество символов в имене: ${ValidatorRule.nameMinLength}`,
-      maxlength: `Максимальное количество символов в имене: ${ValidatorRule.nameMaxLength}`,
-    }
-  },
+      required: 'Пожалуйста, обязательно укажите ваше имя',
+      minlength: `Минимальное количество символов в имени: ${RuleParam.nameMinLength}`,
+      maxlength: `Максимальное количество символов в имене: ${RuleParam.nameMaxLength}`}},
   clientNameLast: {
-    RulesArr: [
+    RuleValidator: [
       Validators.required,
-      Validators.minLength(ValidatorRule.nameMinLength),
-      Validators.maxLength(ValidatorRule.nameMaxLength)],
+      Validators.minLength(RuleParam.nameMinLength),
+      Validators.maxLength(RuleParam.nameMaxLength)],
     ErrorMessage: {
-      required: 'Пожалуйста, обязательно, укажите вашу фамилию',
-      minlength: `Минимальное количество символов в фамилии: ${ValidatorRule.nameMinLength}`,
-      maxlength: `Максимальное количество символов в фамилии: ${ValidatorRule.nameMaxLength}`,
-    }
-  },
+      required: 'Пожалуйста, обязательно укажите вашу фамилию',
+      minlength: `Минимальное количество символов в фамилии: ${RuleParam.nameMinLength}`,
+      maxlength: `Максимальное количество символов в фамилии: ${RuleParam.nameMaxLength}`}},
   clientNameMiddle: {
-    RulesArr: [
+    RuleValidator: [
       Validators.required,
-      Validators.minLength(ValidatorRule.nameMinLength),
-      Validators.maxLength(ValidatorRule.nameMaxLength)],
+      Validators.minLength(RuleParam.nameMinLength),
+      Validators.maxLength(RuleParam.nameMaxLength)],
     ErrorMessage: {
-      required: 'Пожалуйста, обязательно, укажите ваше отчество',
-      minlength: `Минимальное количество символов в отчестве: ${ValidatorRule.nameMinLength}`,
-      maxlength: `Максимальное количество символов в отчестве: ${ValidatorRule.nameMaxLength}`,
-    }
-  },
+      required: 'Пожалуйста, обязательно укажите ваше отчество',
+      minlength: `Минимальное количество символов в отчестве: ${RuleParam.nameMinLength}`,
+      maxlength: `Максимальное количество символов в отчестве: ${RuleParam.nameMaxLength}`}},
   clientPhone: {
-    RulesArr: [
+    RuleValidator: [
       Validators.required,
-      Validators.minLength(ValidatorRule.phoneMinLength),
-      Validators.maxLength(ValidatorRule.phoneMaxLength)
-    ],
+      Validators.minLength(RuleParam.phoneMinLength),
+      Validators.maxLength(RuleParam.phoneMaxLength)],
     ErrorMessage: {
-      required: 'Пожалуйста, обязательно, укажите ваш номер телефона',
-      minlength: 'Неверный формат телефонного номера, укажите 9 цифр вашего номера, например 296910330',
-      maxlength: 'Неверный формат телефонного номера, укажите 9 цифр вашего номера, например 296910330',
-    }
-  },
+      required: 'Пожалуйста, обязательно укажите ваш номер телефона',
+      minlength: `Неверный формат телефонного номера, укажите 9 цифр вашего номера, например 296910330`,
+      maxlength: `Неверный формат телефонного номера, укажите 9 цифр вашего номера, например 296910330`}},
   clientEmail: {
-    RulesArr: [
+    RuleValidator: [
       Validators.required,
-      Validators.minLength(ValidatorRule.phoneMinLength),
-      Validators.maxLength(ValidatorRule.phoneMaxLength)
-    ],
+      Validators.minLength(RuleParam.phoneMinLength),
+      Validators.maxLength(RuleParam.phoneMaxLength)],
     ErrorMessage: {
-      required: 'Пожалуйста, обязательно, укажите адрес вашей электронной почты',
-      minlength: 'Проверте введеный вами адрес электронной почты',
-      maxlength: 'Проверте введеный вами адрес электронной почты',
-    }
-  },
+      required: `Пожалуйста, обязательно укажите адрес вашей электронной почты`,
+      minlength: `Проверьте введенный вами адрес электронной почты`,
+      maxlength: `Проверьте введенный вами адрес электронной почты`}},
   agreeRules: {
-    RulesArr: [
-      Validators.required
-    ],
+    RuleValidator: [Validators.required],
     ErrorMessage: {
-      required: 'Пожалуйста, подтвердите, согласие на обработку ваших персональных данных',
-    }
-  },
+      required: `Пожалуйста, подтвердите, согласие на обработку ваших персональных данных`}},
 }

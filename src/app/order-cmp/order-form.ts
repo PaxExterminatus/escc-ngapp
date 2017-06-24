@@ -1,7 +1,7 @@
 import {Component, Input, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 
-import { CourseArr, CourseClass, ValidatorArr, ValidatorRule } from '../order-model/order';
+import { CourseArr, CourseClass, RuleArr, RuleParam } from '../order-model/order';
 
 @Component({
   selector: 'app-order-form',
@@ -10,7 +10,7 @@ import { CourseArr, CourseClass, ValidatorArr, ValidatorRule } from '../order-mo
 
 export class OrderFormComponent implements OnInit {
   courseArr = CourseArr;
-  validatorRule = ValidatorRule;
+  validatorRule = RuleParam;
   courseObj = new CourseClass();
   formDescH1 = '';
   formDescSubmit = '';
@@ -56,14 +56,13 @@ export class OrderFormComponent implements OnInit {
   }
 
   formCheck() {
-    this.formErrors = new Object();
-    for (const vField in ValidatorArr) {
-      const formControlObj = this.orderForm.get(vField);
-      if (formControlObj) {
-        if (!formControlObj.valid && formControlObj.dirty) {
-          for (const error in formControlObj.errors)
-            this.formErrors[vField] = ValidatorArr[vField].ErrorMessage[error];
-        }
+    this.formErrors = new Object(); // Обнуляем список ошибок
+    for (const vField in RuleArr) { // Получаем имена полей для которых существуют ошибки
+      const formControlObj = this.orderForm.get(vField); // Находим FormControl по его имени
+      if (formControlObj && !formControlObj.valid && formControlObj.dirty) { // Если FormControl найден и невалидный и пользователь вводил данные
+          for (const error in formControlObj.errors) { // Проверяем список лшибок в FormControl
+            this.formErrors[vField] = RuleArr[vField].ErrorMessage[error]; // Для каждой // ошибки ищeм сообщение в ErrorMessage и заносим его в formErrors
+          }
       }
     }
   }
@@ -75,20 +74,20 @@ export class OrderFormComponent implements OnInit {
 }
 
 const etl_short = {
-  course: [, ValidatorArr.course.RulesArr],
-  clientNameFirst: ['', ValidatorArr.clientNameFirst.RulesArr],
-  clientNameLast: ['', ValidatorArr.clientNameLast.RulesArr],
-  clientPhone: ['', ValidatorArr.clientPhone.RulesArr],
-  clientEmail: ['', ValidatorArr.clientEmail.RulesArr],
-  agreeRules: [true, ValidatorArr.agreeRules.RulesArr],
+  course: [, RuleArr.course.RuleValidator],
+  clientNameFirst: ['', RuleArr.clientNameFirst.RuleValidator],
+  clientNameLast: ['', RuleArr.clientNameLast.RuleValidator],
+  clientPhone: ['', RuleArr.clientPhone.RuleValidator],
+  clientEmail: ['', RuleArr.clientEmail.RuleValidator],
+  agreeRules: [true, RuleArr.agreeRules.RuleValidator],
 }
 
 const etl_normal = {
-  course: [, ValidatorArr.course.RulesArr],
-  clientNameFirst: ['', ValidatorArr.clientNameFirst.RulesArr],
-  clientNameLast: ['', ValidatorArr.clientNameLast.RulesArr],
+  course: [, RuleArr.course.RuleValidator],
+  clientNameFirst: ['', RuleArr.clientNameFirst.RuleValidator],
+  clientNameLast: ['', RuleArr.clientNameLast.RuleValidator],
   clientNameMiddle: ['', ],
-  clientPhone: ['', ValidatorArr.clientPhone.RulesArr],
-  clientEmail: ['', ValidatorArr.clientEmail.RulesArr],
-  agreeRules: [true, ValidatorArr.agreeRules.RulesArr],
+  clientPhone: ['', RuleArr.clientPhone.RuleValidator],
+  clientEmail: ['', RuleArr.clientEmail.RuleValidator],
+  agreeRules: [true, RuleArr.agreeRules.RuleValidator],
 }
