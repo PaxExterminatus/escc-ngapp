@@ -20,7 +20,8 @@ export const RuleParam = {
   nameMaxLength: 25,
   phoneMinLength: 9,
   phoneMaxLength: 9,
-  emailMinLength: 6
+  emailMinLength: 6,
+  notNumber: /^[^0-9]+$/i,
 }
 
 export const RuleArr = {
@@ -32,11 +33,13 @@ export const RuleArr = {
     RuleValidator: [
       Validators.required,
       Validators.minLength(RuleParam.nameMinLength),
-      Validators.maxLength(RuleParam.nameMaxLength)],
+      Validators.maxLength(RuleParam.nameMaxLength),
+    ],
     ErrorMessage: {
       required: 'Пожалуйста, обязательно укажите ваше имя',
       minlength: `Минимальное количество символов в имени: ${RuleParam.nameMinLength}`,
-      maxlength: `Максимальное количество символов в имене: ${RuleParam.nameMaxLength}`}},
+      maxlength: `Максимальное количество символов в имене: ${RuleParam.nameMaxLength}`,
+    }},
   clientNameLast: {
     RuleValidator: [
       Validators.required,
