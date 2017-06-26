@@ -2,6 +2,7 @@ import {Component, Input, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 
 import { CourseArr, CourseClass, RuleArr, RuleParam } from '../order-model/order';
+import { FormDeskClass } from '../order-cmp/order-form-desk';
 
 @Component({
   selector: 'app-order-form',
@@ -9,13 +10,12 @@ import { CourseArr, CourseClass, RuleArr, RuleParam } from '../order-model/order
 })
 
 export class OrderFormComponent implements OnInit {
+  @Input() formType: string;
+  @Input() formClass: string;
+  formDesk: FormDeskClass;
   courseArr = CourseArr;
-  validatorRule = RuleParam;
   courseObj = new CourseClass();
-  formDescH1 = '';
-  formDescSubmit = '';
   orderForm: FormGroup;
-  @Input() formType;
 
   formErrors: any = new Object();
 
@@ -34,25 +34,25 @@ export class OrderFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createOrderForm(this.formType);
+    this.initFormType(); // Список элементов управления
+    this.initFormClass(); // Описание формы
+    this.orderForm.valueChanges.subscribe(data => this.onValueChanged()); // Подписка на данные формы
   }
 
-  createOrderForm(formType: string) {
-    switch (formType) {
-      case 'etl_short':
+  initFormType() {
+    if (this.formClass === 'etl') {
+
+      if (this.formType === 'short') {
         this.orderForm = this.fb.group(etl_short);
-        this.formDescH1 = 'Заявка на пробный урок';
-        this.formDescSubmit = 'Скачать пробный урок';
-        break;
-      case 'etl_normal':
+      } else if (this.formType === 'normal') {
         this.orderForm = this.fb.group(etl_normal);
-        this.formDescH1 = 'Заявка на пробный урок';
-        this.formDescSubmit = 'Скачать пробный урок';
-        break;
-      default:
-        break;
+      }
+
     }
-    this.orderForm.valueChanges.subscribe(data => this.onValueChanged()); // Подписка на данные
+  }
+
+  initFormClass() {
+    this.formDesk = new FormDeskClass(this.formClass);
   }
 
   formCheck() {
@@ -70,7 +70,6 @@ export class OrderFormComponent implements OnInit {
   onValueChanged() {
     this.formCheck();
   }
-
 }
 
 const etl_short = {

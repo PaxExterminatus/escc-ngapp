@@ -1,4 +1,4 @@
-<h1>{{formDescH1}}</h1>
+<h1>{{formDesk.Caption}}</h1>
 <form
   action="http://dev.office.eshko.net:8080/esccapp/tst/submit.jsp"
   method="get"
@@ -34,7 +34,6 @@
 
   <div class="form-group">
     <label class="center-block" for="iname">Имя</label>
-    <p *ngIf="formErrors.clientNameFirst">{{formErrors.clientNameFirst}}</p>
     <input
       type="text"
       name="iname" id="iname"
@@ -42,7 +41,9 @@
       class="form-control"
       [value] = orderForm.value.clientNameFirst
     >
-
+    <p
+      class="alert alert-danger"
+      *ngIf="formErrors.clientNameFirst">{{formErrors.clientNameFirst}}</p>
   </div>
 
   <div class="form-group">
@@ -53,9 +54,7 @@
       formControlName="clientNameLast"
       class="form-control">
     <p class="alert alert-danger"
-       *ngIf="formErrors.clientNameLast">
-      {{formErrors.clientNameLast}}
-    </p>
+       *ngIf="formErrors.clientNameLast">{{formErrors.clientNameLast}}</p>
   </div>
 
   <div class="form-group" *ngIf="orderForm.value.hasOwnProperty('clientNameMiddle')">
@@ -75,10 +74,7 @@
       name="phone"
       formControlName="clientPhone"
       class="form-control">
-    <p class="alert alert-danger"
-       *ngIf="formErrors.clientPhone">
-      {{formErrors.clientPhone}}
-    </p>
+    <p class="alert alert-danger" *ngIf="formErrors.clientPhone">{{formErrors.clientPhone}}</p>
   </div>
 
   <div class="form-group">
@@ -100,7 +96,7 @@
     </label>
   </div>
   <button
-    class="btn btn-success">{{formDescSubmit}}</button>
+    class="btn btn-success">{{formDesk.Submit}}</button>
 
 </form>
 <p>Form value: {{ orderForm.value | json }}</p>
