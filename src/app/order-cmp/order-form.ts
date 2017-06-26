@@ -1,7 +1,7 @@
 import {Component, Input, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 
-import { CourseArr, CourseClass, RuleArr, RuleParam } from '../order-model/order';
+import { courseObjArr, CourseClass, RuleArr, RuleParam } from '../order-model/order';
 import { FormDeskClass } from '../order-cmp/order-form-desk';
 
 @Component({
@@ -13,8 +13,8 @@ export class OrderFormComponent implements OnInit {
   @Input() formType: string;
   @Input() formClass: string;
   formDesk: FormDeskClass;
-  courseArr = CourseArr;
-  courseObj = new CourseClass();
+  courseObjArr = courseObjArr;
+  courseObjPick = new CourseClass();
   orderForm: FormGroup;
 
   formErrors: any = new Object();
@@ -22,7 +22,7 @@ export class OrderFormComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   onChangeCourse(e: any) {
-    this.courseObj = this.courseArr.find(course => course.id === +e);
+    this.courseObjPick = this.courseObjArr.find(course => course.id === +e);
   }
 
   onSubmit(HTMLForm: HTMLFormElement) {

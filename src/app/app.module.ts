@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { AppOrderComponent } from './order-app/order'; // Приложение формы
 
 import { OrderFormComponent } from './order-cmp/order-form'; // Компонент формы
+import { CourseInfoComponent } from './form-cmp/course-info';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppOrderComponent,
     OrderFormComponent,
+    CourseInfoComponent,
   ],
   imports: [
     BrowserModule,

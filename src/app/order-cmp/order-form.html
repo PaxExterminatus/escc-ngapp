@@ -9,11 +9,12 @@
   #OrderHTMLForm>
 
   <div class="form-group">
-    <!--course source block -->
-    <div *ngIf="courseObj.hasOwnProperty('source')">
-      <img width="100" src="http://admin.eshko.by/lp2/img/{{courseObj.source}}.jpg">
-      <p>Обычная цена {{courseObj.price}}, цена для вас {{courseObj.sale}}</p>
-    </div>
+    <app-course-info
+      *ngIf="courseObjPick.sourcePath"
+      [priceDefault]="courseObjPick.priceDefault"
+      [priceSale]="courseObjPick.priceSale"
+      [sourcePath]="courseObjPick.sourcePath">
+    </app-course-info>
 
     <label class="center-block">Курс</label>
     <select
@@ -23,7 +24,7 @@
       (change)="onChangeCourse($event.target.value)"
     >
       <option
-        *ngFor="let course of courseArr"
+        *ngFor="let course of courseObjArr"
         [value]="course.id"
       >
         {{course.name}}
