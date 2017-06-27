@@ -12,10 +12,12 @@ import { FormDeskClass } from '../order-cmp/order-form-desk';
 export class OrderFormComponent implements OnInit {
   @Input() formType: string;
   @Input() formClass: string;
+  @Input() formCourseInfoType: string;
   formDesk: FormDeskClass;
   courseObjArr = courseObjArr;
   courseObjPick = new CourseClass();
   orderForm: FormGroup;
+  orderTrySubmit = false;
 
   formErrors: any = new Object();
 
@@ -26,10 +28,12 @@ export class OrderFormComponent implements OnInit {
   }
 
   onSubmit(HTMLForm: HTMLFormElement) {
+    this.orderTrySubmit = true;
     if (this.orderForm.valid) {
       HTMLForm.submit();
     } else {
-      console.log(this.orderForm.status);
+      this.formCheck();
+      this.orderTrySubmit = false;
     }
   }
 
@@ -59,7 +63,7 @@ export class OrderFormComponent implements OnInit {
     this.formErrors = new Object(); // Обнуляем список ошибок
     for (const vField in RuleArr) { // Получаем имена полей для которых существуют ошибки
       const formControlObj = this.orderForm.get(vField); // Находим FormControl по его имени
-      if (formControlObj && !formControlObj.valid && formControlObj.dirty) { // Если FormControl найден и невалидный и пользователь вводил данные
+      if (formControlObj && !formControlObj.valid && (formControlObj.dirty || this.orderTrySubmit)) { // Если FormControl найден и невалидный и пользователь вводил данные
           for (const error in formControlObj.errors) { // Проверяем список лшибок в FormControl
             this.formErrors[vField] = RuleArr[vField].ErrorMessage[error]; // Для каждой // ошибки ищeм сообщение в ErrorMessage и заносим его в formErrors
           }

@@ -7,6 +7,7 @@ import { AppOrderComponent } from './order-app/order'; // Приложение �
 
 import { OrderFormComponent } from './order-cmp/order-form'; // Компонент формы
 import { CourseInfoComponent } from './form-cmp/course-info';
+import { MessageErrorComponent } from './form-cmp/message-error';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { CourseInfoComponent } from './form-cmp/course-info';
     AppOrderComponent,
     OrderFormComponent,
     CourseInfoComponent,
+    MessageErrorComponent
   ],
   imports: [
     BrowserModule,

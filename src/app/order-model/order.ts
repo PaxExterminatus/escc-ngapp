@@ -11,8 +11,8 @@ export class CourseClass {
 export const courseObjArr: CourseClass[] = [
   {id: 1, name: 'ENG', sourcePath: 'eng', priceDefault: 50.10, priceSale: 30.20},
   {id: 2, name: 'ITA', sourcePath: 'ita', priceDefault: 51.10, priceSale: 31.20},
-  {id: 3, name: 'FRA', sourcePath: 'fra', priceDefault: 52.10, priceSale: 32.20},
-  {id: 4, name: 'DEU', sourcePath: 'deu', priceDefault: 53.10, priceSale: 33.20},
+  {id: 3, name: 'FRA', sourcePath: 'fra', priceDefault: 52.10, priceSale: null},
+  {id: 4, name: 'DEU', sourcePath: 'deu', priceDefault: 53.10, priceSale: null},
 ]
 
 export const RuleParam = {
@@ -21,7 +21,7 @@ export const RuleParam = {
   phoneMinLength: 9,
   phoneMaxLength: 9,
   emailMinLength: 6,
-  notNumber: /^[^0-9]+$/i,
+  emailMaxLength: 40
 }
 
 export const RuleArr = {
@@ -70,8 +70,8 @@ export const RuleArr = {
   clientEmail: {
     RuleValidator: [
       Validators.required,
-      Validators.minLength(RuleParam.phoneMinLength),
-      Validators.maxLength(RuleParam.phoneMaxLength)],
+      Validators.minLength(RuleParam.emailMinLength),
+      Validators.maxLength(RuleParam.emailMaxLength)],
     ErrorMessage: {
       required: `Пожалуйста, обязательно укажите адрес вашей электронной почты`,
       minlength: `Проверьте введенный вами адрес электронной почты`,

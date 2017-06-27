@@ -1,0 +1,55 @@
+/*Классы формы*/
+.form_section{
+  padding: 20px 50px 20px 50px;
+  width: 100%;
+  /*border: solid 1px red;*/
+  /*background-color: bisque;*/
+}
+
+.header{
+  color: #444;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 32px;
+  /*text-align: center;*/
+  text-transform: uppercase;
+}
+
+.form{
+  padding: 10px 3px 20px 3px;
+  /*background-color: darkgrey;*/
+  /*border: solid 1px red;*/
+}
+/*Информация о курсе*/
+.course_info{}
+.course_cover{
+  float: left;
+  margin: 0px 10px 10px 0px;
+  width: 200px;
+}
+.course_price{}
+.course_price_def{}
+.course_price_sale{}
+/*Сообщение валидации*/
+.message_error_block{
+  padding: 5px;
+  background-color: #FF8A8A;
+  color: white;
+  border-radius: 5px;
+}
+.message_error_label{}
+
+.form-control-section{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.form-control-block {
+  width: 48%;
+  margin: 5px 10px 10px 0px;
+  flex-grow: 1;
+}
+
+.cours-block {
+  width: 100%;
+}

@@ -1,5 +1,7 @@
-<h1>{{formDesk.Caption}}</h1>
+<section class="form_section">
+  <span class="header">{{formDesk.Caption}}</span>
 <form
+  class="form"
   action="http://dev.office.eshko.net:8080/esccapp/tst/submit.jsp"
   method="get"
   target="_blank"
@@ -8,79 +10,77 @@
   [formGroup]="orderForm"
   #OrderHTMLForm>
 
-  <div class="form-group">
-    <app-course-info [courseObj]="courseObjPick"></app-course-info>
+  <div class="form-control-section">
 
-    <label class="center-block">Курс</label>
-    <select
-      name="course"
-      formControlName="course"
-      class="form-control"
-      (change)="onChangeCourse($event.target.value)"
-    >
-      <option
-        *ngFor="let course of courseObjArr"
-        [value]="course.id"
-      >
-        {{course.name}}
-      </option>
-    </select>
-    <p>course status: {{ orderForm.get('course').status }} </p>
-  </div>
+    <div class="form-control-block cours-block">
+      <app-course-info *ngIf="formCourseInfoType" [courseObj]="courseObjPick"></app-course-info>
+      <label class="center-block">Курс</label>
+      <select
+        name="course"
+        formControlName="course"
+        class="form-control"
+        (change)="onChangeCourse($event.target.value)">
+        <option
+          *ngFor="let course of courseObjArr"
+          [value]="course.id">
+          {{course.name}}
+        </option>
+      </select>
+      <app-message-error [msgValue]="formErrors.course"></app-message-error>
+    </div>
 
-  <div class="form-group">
-    <label class="center-block" for="iname">Имя</label>
-    <input
-      type="text"
-      name="iname" id="iname"
-      formControlName="clientNameFirst"
-      class="form-control"
-      [value] = orderForm.value.clientNameFirst
-    >
-    <p
-      class="alert alert-danger"
-      *ngIf="formErrors.clientNameFirst">{{formErrors.clientNameFirst}}</p>
-  </div>
+    <div class="form-control-block">
+      <label class="center-block" for="iname">Имя</label>
+      <input
+        type="text"
+        name="iname" id="iname"
+        formControlName="clientNameFirst"
+        class="form-control"
+        [value] = orderForm.value.clientNameFirst>
+      <app-message-error [msgValue]="formErrors.clientNameFirst"></app-message-error>
+    </div>
 
-  <div class="form-group">
-    <label class="center-block">Фамилия</label>
-    <input
-      type="text"
-      name="fname"
-      formControlName="clientNameLast"
-      class="form-control">
-    <p class="alert alert-danger"
-       *ngIf="formErrors.clientNameLast">{{formErrors.clientNameLast}}</p>
-  </div>
+    <div class="form-control-block">
+      <label class="center-block">Фамилия</label>
+      <input
+        type="text"
+        name="fname"
+        formControlName="clientNameLast"
+        class="form-control">
+      <app-message-error [msgValue]="formErrors.clientNameLast"></app-message-error>
+    </div>
 
-  <div class="form-group" *ngIf="orderForm.value.hasOwnProperty('clientNameMiddle')">
-    <label class="center-block">Отчество</label>
-    <input
-      type="text"
-      name="mname"
-      formControlName="clientNameMiddle"
-      class="form-control">
-    <p>clientNameMiddle status: {{ orderForm.get('clientNameMiddle').status }} </p>
-  </div>
+    <div class="form-control-block" *ngIf="orderForm.value.hasOwnProperty('clientNameMiddle')">
+      <label class="center-block">Отчество</label>
+      <input
+        type="text"
+        name="mname"
+        formControlName="clientNameMiddle"
+        class="form-control">
+      <app-message-error [msgValue]="formErrors.clientNameMiddle"></app-message-error>
+    </div>
 
-  <div class="form-group">
-    <label class="center-block">Телефон</label>
-    <input
-      type="text"
-      name="phone"
-      formControlName="clientPhone"
-      class="form-control">
-    <p class="alert alert-danger" *ngIf="formErrors.clientPhone">{{formErrors.clientPhone}}</p>
-  </div>
+    <div class="form-control-block">
+      <label class="center-block">Телефон</label>
+      <input
+        type="text"
+        name="phone"
+        formControlName="clientPhone"
+        class="form-control">
+        <app-message-error [msgValue]="formErrors.clientPhone"></app-message-error>
+    </div>
 
-  <div class="form-group">
-    <label class="center-block">E-mail</label>
-    <input
-      type="text"
-      name="email"
-      formControlName="clientEmail"
-      class="form-control">
-    <p>clientEmail status: {{ orderForm.get('clientEmail').status }} </p>
+    <div class="form-control-block">
+      <div>
+        <label>Электронная почта</label>
+      </div>
+      <input
+        type="text"
+        name="email"
+        formControlName="clientEmail"
+        class="form-control">
+      <app-message-error [msgValue]="formErrors.clientEmail"></app-message-error>
+    </div>
   </div>
 
   <div class="checkbox">
@@ -90,10 +90,9 @@
         name="agree"
         formControlName="agreeRules">Согласиться с правилами
     </label>
+    <app-message-error [msgValue]="formErrors.agreeRules"></app-message-error>
   </div>
   <button
     class="btn btn-success">{{formDesk.Submit}}</button>
-
 </form>
-<p>Form value: {{ orderForm.value | json }}</p>
-<p>Form status: {{ orderForm.status | json }}</p>
+</section>
