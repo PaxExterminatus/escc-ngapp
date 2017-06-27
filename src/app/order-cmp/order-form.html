@@ -9,12 +9,7 @@
   #OrderHTMLForm>
 
   <div class="form-group">
-    <app-course-info
-      *ngIf="courseObjPick.sourcePath"
-      [priceDefault]="courseObjPick.priceDefault"
-      [priceSale]="courseObjPick.priceSale"
-      [sourcePath]="courseObjPick.sourcePath">
-    </app-course-info>
+    <app-course-info [courseObj]="courseObjPick"></app-course-info>
 
     <label class="center-block">Курс</label>
     <select

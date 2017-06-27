@@ -1,5 +1,5 @@
-<div *ngIf="sourcePath">
-  <img width="100" src="http://admin.eshko.by/lp2/img/{{sourcePath}}.jpg">
-  <p>Цена: {{priceDefault}}</p>
-  <p>Цена со скидкой: {{priceSale}}</p>
+<div *ngIf="courseObj.sourcePath">
+  <img width="100" src="http://admin.eshko.by/lp2/img/{{courseObj.sourcePath}}.jpg">
+  <p>Цена: {{courseObj.priceDefault}}</p>
+  <p>Цена со скидкой: {{courseObj.priceSale}}</p>
 </div>

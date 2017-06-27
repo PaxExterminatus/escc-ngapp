@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CourseClass } from '../order-model/order';
 
 @Component({
   selector: 'app-course-info',
@@ -6,7 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 
 export class CourseInfoComponent {
-  @Input() sourcePath: string;
-  @Input() priceDefault: string;
-  @Input() priceSale: string;
+  @Input() courseObj: CourseClass;
 }
