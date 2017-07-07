@@ -1,10 +1,10 @@
-<div class="course_info clearfix">
-  <img class="course_cover"
+<div class="es-course">
+  <img class="es-course-cover"
     *ngIf="courseObj.sourcePath" src="http://admin.eshko.by/lp2/img/{{courseObj.sourcePath}}.jpg">
-  <div class="course_price">
-    <p class="course_price_def"
-      *ngIf="courseObj.priceDefault">Цена: {{courseObj.priceDefault}}</p>
-    <p class="course_price_sale"
-       *ngIf="courseObj.priceSale">Цена со скидкой: {{courseObj.priceSale}}</p>
-  </div>
+    <p class="es-course-price"
+      *ngIf="courseObj.priceDefault">Цена: {{courseObj.priceDefault}}
+    </p>
+    <p class="es-course-sale"
+       *ngIf="courseObj.priceSale">Цена со скидкой: {{courseObj.priceSale}}
+    </p>
 </div>
