@@ -1,30 +1,15 @@
 import {Validators} from '@angular/forms';
 
-export class CourseClass {
-  id: number;
-  name: string;
-  sourcePath: string;
-  priceDefault: number;
-  priceSale: number;
-}
-
-export const courseObjArr: CourseClass[] = [
-  {id: 1, name: 'ENG', sourcePath: 'eng', priceDefault: 50.10, priceSale: 30.20},
-  {id: 2, name: 'ITA', sourcePath: 'ita', priceDefault: 51.10, priceSale: 31.20},
-  {id: 3, name: 'FRA', sourcePath: 'fra', priceDefault: 52.10, priceSale: null},
-  {id: 4, name: 'DEU', sourcePath: 'deu', priceDefault: 53.10, priceSale: null},
-]
-
-export const RuleParam = {
+const RuleParam = {
   nameMinLength: 3,
   nameMaxLength: 25,
   phoneMinLength: 9,
   phoneMaxLength: 9,
   emailMinLength: 6,
   emailMaxLength: 40
-}
+};
 
-export const RuleArr = {
+export const mControlRules = {
   course: {
     RuleValidator: [Validators.required],
     ErrorMessage: {
@@ -81,3 +66,18 @@ export const RuleArr = {
     ErrorMessage: {
       required: `Пожалуйста, подтвердите, согласие на обработку ваших персональных данных`}},
 }
+
+export class CourseClass {
+  id: number;
+  name: string;
+  sourcePath: string;
+  priceDefault: number;
+  priceSale: number;
+}
+
+export const courseObjArr: CourseClass[] = [
+  {id: 1, name: 'ENG', sourcePath: 'eng', priceDefault: 50.10, priceSale: 30.20},
+  {id: 2, name: 'ITA', sourcePath: 'ita', priceDefault: 51.10, priceSale: 31.20},
+  {id: 3, name: 'FRA', sourcePath: 'fra', priceDefault: 52.10, priceSale: null},
+  {id: 4, name: 'DEU', sourcePath: 'deu', priceDefault: 53.10, priceSale: null},
+]

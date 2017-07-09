@@ -1,7 +1,7 @@
 import {Component, Input, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 
-import { courseObjArr, CourseClass, RuleArr, RuleParam } from '../order-model/order';
+import { courseObjArr, CourseClass, mControlRules } from '../order-model/order';
 import { FormDeskClass } from '../order-cmp/order-form-desk';
 
 @Component({
@@ -32,7 +32,8 @@ export class OrderFormComponent implements OnInit {
     if (this.orderForm.valid) {
       HTMLForm.submit();
     } else {
-      this.formCheck();
+      this.dataRepair();
+      this.dataCheck();
       this.orderTrySubmit = false;
     }
   }
@@ -59,38 +60,51 @@ export class OrderFormComponent implements OnInit {
     this.formDesk = new FormDeskClass(this.formClass);
   }
 
-  formCheck() {
+  dataCheck() { // Валидация данных и вывод сообщений об ошибках
     this.formErrors = new Object(); // Обнуляем список ошибок
-    for (const vField in RuleArr) { // Получаем имена полей для которых существуют ошибки
+    for (const vField in mControlRules) { // Получаем имена полей для которых существуют ошибки
       const formControlObj = this.orderForm.get(vField); // Находим FormControl по его имени
       if (formControlObj && !formControlObj.valid && (formControlObj.dirty || this.orderTrySubmit)) { // Если FormControl найден и невалидный и пользователь вводил данные
           for (const error in formControlObj.errors) { // Проверяем список лшибок в FormControl
-            this.formErrors[vField] = RuleArr[vField].ErrorMessage[error]; // Для каждой // ошибки ищeм сообщение в ErrorMessage и заносим его в formErrors
+            this.formErrors[vField] = mControlRules[vField].ErrorMessage[error]; // Для каждой // ошибки ищим сообщение в ErrorMessage и заносим его в formErrors
           }
       }
     }
   }
 
+  dataRepair() { // Убирает недопустимые данные из полей ввода
+    let tmpVal: string;
+    const reg = /x/gi;
+    for (const formControlObj in this.orderForm.controls) {
+      tmpVal = this.orderForm.get(formControlObj).value;
+      console.log();
+      if (formControlObj === 'clientNameFirst') {
+        tmpVal = tmpVal.replace(reg, '');
+        this.orderForm.get(formControlObj).setValue(tmpVal);
+      }
+    }
+  }
+
   onValueChanged() {
-    this.formCheck();
+    this.dataCheck();
   }
 }
 
 const etl_short = {
-  course: [, RuleArr.course.RuleValidator],
-  clientNameFirst: ['', RuleArr.clientNameFirst.RuleValidator],
-  clientNameLast: ['', RuleArr.clientNameLast.RuleValidator],
-  clientPhone: ['', RuleArr.clientPhone.RuleValidator],
-  clientEmail: ['', RuleArr.clientEmail.RuleValidator],
-  agreeRules: [true, RuleArr.agreeRules.RuleValidator],
+  course: [, mControlRules.course.RuleValidator],
+  clientNameFirst: ['', mControlRules.clientNameFirst.RuleValidator],
+  clientNameLast: ['', mControlRules.clientNameLast.RuleValidator],
+  clientPhone: ['', mControlRules.clientPhone.RuleValidator],
+  clientEmail: ['', mControlRules.clientEmail.RuleValidator],
+  agreeRules: [true, mControlRules.agreeRules.RuleValidator],
 }
 
 const etl_normal = {
-  course: [, RuleArr.course.RuleValidator],
-  clientNameFirst: ['', RuleArr.clientNameFirst.RuleValidator],
-  clientNameLast: ['', RuleArr.clientNameLast.RuleValidator],
+  course: [, mControlRules.course.RuleValidator],
+  clientNameFirst: ['', mControlRules.clientNameFirst.RuleValidator],
+  clientNameLast: ['', mControlRules.clientNameLast.RuleValidator],
   clientNameMiddle: ['', ],
-  clientPhone: ['', RuleArr.clientPhone.RuleValidator],
-  clientEmail: ['', RuleArr.clientEmail.RuleValidator],
-  agreeRules: [true, RuleArr.agreeRules.RuleValidator],
+  clientPhone: ['', mControlRules.clientPhone.RuleValidator],
+  clientEmail: ['', mControlRules.clientEmail.RuleValidator],
+  agreeRules: [true, mControlRules.agreeRules.RuleValidator],
 }

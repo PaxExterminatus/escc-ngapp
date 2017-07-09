@@ -49,7 +49,7 @@
     <app-message-error [msgValue]="formErrors.clientNameLast"></app-message-error>
   </div>
 
-  <div class="es-form-field" *ngIf="orderForm.value.hasOwnProperty('clientNameMiddle')">
+  <div class="es-form-field" *ngIf="orderForm.controls.clientNameMiddle">
     <label for="mname">Отчество</label>
     <input
       type="text"
