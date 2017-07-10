@@ -1,7 +1,7 @@
 import {Component, Input, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 
-import { courseObjArr, CourseClass, mControlRules } from '../order-model/order';
+import { courseObjArr, CourseClass, mControlRules } from '../order-model/form';
 import { FormDeskClass } from '../order-cmp/order-form-desk';
 
 @Component({
@@ -19,7 +19,7 @@ export class OrderFormComponent implements OnInit {
   orderForm: FormGroup;
   orderTrySubmit = false;
 
-  formErrors: any = new Object();
+  formErrors = new Object();
 
   constructor(private fb: FormBuilder) {}
 
@@ -33,7 +33,7 @@ export class OrderFormComponent implements OnInit {
       HTMLForm.submit();
     } else {
       this.dataRepair();
-      this.dataCheck();
+      this.dataCheck(true);
       this.orderTrySubmit = false;
     }
   }
@@ -60,27 +60,27 @@ export class OrderFormComponent implements OnInit {
     this.formDesk = new FormDeskClass(this.formClass);
   }
 
-  dataCheck() { // Валидация данных и вывод сообщений об ошибках
-    this.formErrors = new Object(); // Обнуляем список ошибок
-    for (const vField in mControlRules) { // Получаем имена полей для которых существуют ошибки
-      const formControlObj = this.orderForm.get(vField); // Находим FormControl по его имени
-      if (formControlObj && !formControlObj.valid && (formControlObj.dirty || this.orderTrySubmit)) { // Если FormControl найден и невалидный и пользователь вводил данные
-          for (const error in formControlObj.errors) { // Проверяем список лшибок в FormControl
-            this.formErrors[vField] = mControlRules[vField].ErrorMessage[error]; // Для каждой // ошибки ищим сообщение в ErrorMessage и заносим его в formErrors
-          }
+  dataCheck(chkAll?: boolean) { // Валидация данных и вывод сообщений об ошибках
+    // this.formErrors = new Object(); // Обнуляем список ошибок
+    for (const controlName in this.orderForm.controls) {
+      const controlObj = this.orderForm.get(controlName);
+      if ((controlObj.invalid && (controlObj.dirty || controlObj.touched)) || chkAll ) {
+        for (const error in controlObj.errors) {
+          this.formErrors[controlName] = mControlRules[controlName].ErrorMessage[error];
+        }
       }
     }
   }
 
-  dataRepair() { // Убирает недопустимые данные из полей ввода
+  dataRepair() { // Валидация данных и вывод сообщений об ошибках
     let tmpVal: string;
-    const reg = /x/gi;
-    for (const formControlObj in this.orderForm.controls) {
-      tmpVal = this.orderForm.get(formControlObj).value;
-      console.log();
-      if (formControlObj === 'clientNameFirst') {
-        tmpVal = tmpVal.replace(reg, '');
-        this.orderForm.get(formControlObj).setValue(tmpVal);
+    for (const controlName in this.orderForm.controls) {
+      const controlObj = this.orderForm.get(controlName);
+      for (let controlIndex in mControlRules[controlName].dataRepairReg) {
+        controlObj.setValue( // Устанавливаем значение для элементов формы
+          controlObj.value.replace( // Заменяем символы
+            mControlRules[controlName].dataRepairReg[controlIndex], '') // Получаем правило по индексу
+        );
       }
     }
   }
@@ -90,13 +90,14 @@ export class OrderFormComponent implements OnInit {
   }
 }
 
+
 const etl_short = {
   course: [, mControlRules.course.RuleValidator],
-  clientNameFirst: ['', mControlRules.clientNameFirst.RuleValidator],
-  clientNameLast: ['', mControlRules.clientNameLast.RuleValidator],
-  clientPhone: ['', mControlRules.clientPhone.RuleValidator],
-  clientEmail: ['', mControlRules.clientEmail.RuleValidator],
-  agreeRules: [true, mControlRules.agreeRules.RuleValidator],
+  clientNameFirst: ['Виталий', mControlRules.clientNameFirst.RuleValidator],
+  clientNameLast: ['Воронин', mControlRules.clientNameLast.RuleValidator],
+  clientPhone: ['293225337', mControlRules.clientPhone.RuleValidator],
+  clientEmail: ['paxexterminatus@gmail.com', mControlRules.clientEmail.RuleValidator],
+  agreeRule: [true, mControlRules.agreeRule.RuleValidator],
 }
 
 const etl_normal = {
@@ -106,5 +107,5 @@ const etl_normal = {
   clientNameMiddle: ['', ],
   clientPhone: ['', mControlRules.clientPhone.RuleValidator],
   clientEmail: ['', mControlRules.clientEmail.RuleValidator],
-  agreeRules: [true, mControlRules.agreeRules.RuleValidator],
+  agreeRule: [true, mControlRules.agreeRule.RuleValidator],
 }

@@ -61,16 +61,18 @@
 
   <div class="es-form-field">
     <label for="phone">Телефон</label>
-    <input
-      type="text"
-      name="phone" id="phone"
-      formControlName="clientPhone"
-      class="form-control">
-      <app-message-error [msgValue]="formErrors.clientPhone"></app-message-error>
+    <div class="input-group"><div class="input-group-addon">+375</div>
+      <input
+        type="text"
+        name="phone" id="phone"
+        formControlName="clientPhone"
+        class="form-control">
+    </div>
+    <app-message-error [msgValue]="formErrors.clientPhone"></app-message-error>
   </div>
 
   <div class="es-form-field">
-      <label for="email">Электронная почта</label>
+    <label for="email">Электронная почта</label>
     <input
       type="text"
       name="email" id="email"
@@ -81,8 +83,8 @@
 
   <div class="es-form-field">
     <div class="checkbox">
-      <label><input type="checkbox" name="agree" formControlName="agreeRules">Согласиться с правилами</label>
-      <app-message-error [msgValue]="formErrors.agreeRules"></app-message-error>
+      <label><input type="checkbox" formControlName="agreeRule">Согласиться с правилами</label>
+      <app-message-error [msgValue]="formErrors.agreeRule"></app-message-error>
     </div>
   </div>
 
