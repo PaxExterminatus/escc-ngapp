@@ -1,12 +1,15 @@
 import {Component, Input, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import { Response } from '@angular/http';
 
-import { courseObjArr, CourseClass, mControlRules } from '../order-model/form';
+import { CourseClass, mControlRules } from '../order-model/form';
 import { FormDeskClass } from '../order-cmp/order-form-desk';
+import { HttpService } from '../form-service/http.service';
 
 @Component({
   selector: 'app-order-form',
-  templateUrl: './order-form.html'
+  templateUrl: './order-form.html',
+  providers: [HttpService]
 })
 
 export class OrderFormComponent implements OnInit {
@@ -14,27 +17,27 @@ export class OrderFormComponent implements OnInit {
   @Input() formClass: string;
   @Input() formCourseInfoType: string;
   formDesk: FormDeskClass;
-  courseObjArr = courseObjArr;
+  private courseObjArr;
   courseObjPick = new CourseClass();
   orderForm: FormGroup;
-  orderTrySubmit = false;
+  formSubmitError = false;
 
   formErrors = new Object();
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private httpService: HttpService) {}
 
   onChangeCourse(e: any) {
     this.courseObjPick = this.courseObjArr.find(course => course.id === +e);
   }
 
   onSubmit(HTMLForm: HTMLFormElement) {
-    this.orderTrySubmit = true;
+
     if (this.orderForm.valid) {
       HTMLForm.submit();
     } else {
       this.dataRepair();
       this.dataCheck(true);
-      this.orderTrySubmit = false;
+      this.formSubmitError = true;
     }
   }
 
@@ -42,6 +45,7 @@ export class OrderFormComponent implements OnInit {
     this.initFormType(); // Список элементов управления
     this.initFormClass(); // Описание формы
     this.orderForm.valueChanges.subscribe(data => this.onValueChanged()); // Подписка на данные формы
+    this.httpService.getCoursesList().subscribe((data: Response) => this.courseObjArr = data.json());
   }
 
   initFormType() {
@@ -52,7 +56,6 @@ export class OrderFormComponent implements OnInit {
       } else if (this.formType === 'normal') {
         this.orderForm = this.fb.group(etl_normal);
       }
-
     }
   }
 
@@ -61,10 +64,10 @@ export class OrderFormComponent implements OnInit {
   }
 
   dataCheck(chkAll?: boolean) { // Валидация данных и вывод сообщений об ошибках
-    // this.formErrors = new Object(); // Обнуляем список ошибок
+    this.formErrors = new Object(); // Обнуляем список ошибок
     for (const controlName in this.orderForm.controls) {
       const controlObj = this.orderForm.get(controlName);
-      if ((controlObj.invalid && (controlObj.dirty || controlObj.touched)) || chkAll ) {
+      if ((controlObj.invalid && (controlObj.dirty || controlObj.touched)) || chkAll || this.formSubmitError ) {
         for (const error in controlObj.errors) {
           this.formErrors[controlName] = mControlRules[controlName].ErrorMessage[error];
         }
@@ -88,8 +91,7 @@ export class OrderFormComponent implements OnInit {
   onValueChanged() {
     this.dataCheck();
   }
-}
-
+};
 
 const etl_short = {
   course: [, mControlRules.course.RuleValidator],
@@ -98,7 +100,7 @@ const etl_short = {
   clientPhone: ['293225337', mControlRules.clientPhone.RuleValidator],
   clientEmail: ['paxexterminatus@gmail.com', mControlRules.clientEmail.RuleValidator],
   agreeRule: [true, mControlRules.agreeRule.RuleValidator],
-}
+};
 
 const etl_normal = {
   course: [, mControlRules.course.RuleValidator],
@@ -108,4 +110,4 @@ const etl_normal = {
   clientPhone: ['', mControlRules.clientPhone.RuleValidator],
   clientEmail: ['', mControlRules.clientEmail.RuleValidator],
   agreeRule: [true, mControlRules.agreeRule.RuleValidator],
-}
+};
