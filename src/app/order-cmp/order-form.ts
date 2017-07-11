@@ -76,7 +76,6 @@ export class OrderFormComponent implements OnInit {
   }
 
   dataRepair() { // Валидация данных и вывод сообщений об ошибках
-    let tmpVal: string;
     for (const controlName in this.orderForm.controls) {
       const controlObj = this.orderForm.get(controlName);
       for (let controlIndex in mControlRules[controlName].dataRepairReg) {
