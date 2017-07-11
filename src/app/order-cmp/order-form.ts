@@ -15,9 +15,9 @@ import { HttpService } from '../form-service/http.service';
 export class OrderFormComponent implements OnInit {
   @Input() formType: string;
   @Input() formClass: string;
-  @Input() formCourseInfoType: string;
+  @Input() formCourseInfoType;
   formDesk: FormDeskClass;
-  private courseObjArr;
+  courseObjArr;
   courseObjPick = new CourseClass();
   orderForm: FormGroup;
   formSubmitError = false;
@@ -27,7 +27,7 @@ export class OrderFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private httpService: HttpService) {}
 
   onChangeCourse(e: any) {
-    this.courseObjPick = this.courseObjArr.find(course => course.id === +e);
+    this.courseObjPick = this.courseObjArr.find(course => course.id === e);
   }
 
   onSubmit(HTMLForm: HTMLFormElement) {
@@ -95,10 +95,10 @@ export class OrderFormComponent implements OnInit {
 
 const etl_short = {
   course: [, mControlRules.course.RuleValidator],
-  clientNameFirst: ['Виталий', mControlRules.clientNameFirst.RuleValidator],
-  clientNameLast: ['Воронин', mControlRules.clientNameLast.RuleValidator],
-  clientPhone: ['293225337', mControlRules.clientPhone.RuleValidator],
-  clientEmail: ['paxexterminatus@gmail.com', mControlRules.clientEmail.RuleValidator],
+  clientNameFirst: [, mControlRules.clientNameFirst.RuleValidator],
+  clientNameLast: [, mControlRules.clientNameLast.RuleValidator],
+  clientPhone: [, mControlRules.clientPhone.RuleValidator],
+  clientEmail: [, mControlRules.clientEmail.RuleValidator],
   agreeRule: [true, mControlRules.agreeRule.RuleValidator],
 };
 
