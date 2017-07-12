@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { OrderFormComponent } from '../order-cmp/order-form'; // Компонент Формы
 
 @Component({
   selector: 'app-order',

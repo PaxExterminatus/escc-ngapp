@@ -1,9 +1,9 @@
 import {Component, Input, OnInit } from '@angular/core';
-import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import {FormGroup, FormBuilder} from '@angular/forms';
 import { Response } from '@angular/http';
 
 import { CourseClass, mControlRules } from '../order-model/form';
-import { FormDeskClass } from '../order-cmp/order-form-desk';
+import { FormDeskClass } from './order-form-desk';
 import { HttpService } from '../form-service/http.service';
 
 @Component({
@@ -22,7 +22,7 @@ export class OrderFormComponent implements OnInit {
   orderForm: FormGroup;
   formSubmitError = false;
 
-  formErrors = new Object();
+  formErrors = {};
 
   constructor(private fb: FormBuilder, private httpService: HttpService) {}
 
@@ -64,18 +64,18 @@ export class OrderFormComponent implements OnInit {
   }
 
   dataCheck(chkAll?: boolean) { // Валидация данных и вывод сообщений об ошибках
-    this.formErrors = new Object(); // Обнуляем список ошибок
+    this.formErrors = {}; //new Object(); // Обнуляем список ошибок
     for (const controlName in this.orderForm.controls) {
       const controlObj = this.orderForm.get(controlName);
       if ((controlObj.invalid && (controlObj.dirty || controlObj.touched)) || chkAll || this.formSubmitError ) {
-        for (const error in controlObj.errors) {
-          this.formErrors[controlName] = mControlRules[controlName].ErrorMessage[error];
-        }
+          for (const error in controlObj.errors) {
+            this.formErrors[controlName] = mControlRules[controlName].ErrorMessage[error];
+          }
       }
     }
   }
 
-  dataRepair() { // Валидация данных и вывод сообщений об ошибках
+  dataRepair() { // Исправление данных
     for (const controlName in this.orderForm.controls) {
       const controlObj = this.orderForm.get(controlName);
       for (let controlIndex in mControlRules[controlName].dataRepairReg) {
@@ -90,19 +90,19 @@ export class OrderFormComponent implements OnInit {
   onValueChanged() {
     this.dataCheck();
   }
-};
+}
 
 const etl_short = {
-  course: [, mControlRules.course.RuleValidator],
-  clientNameFirst: [, mControlRules.clientNameFirst.RuleValidator],
-  clientNameLast: [, mControlRules.clientNameLast.RuleValidator],
-  clientPhone: [, mControlRules.clientPhone.RuleValidator],
-  clientEmail: [, mControlRules.clientEmail.RuleValidator],
+  course: [null, mControlRules.course.RuleValidator],
+  clientNameFirst: ['', mControlRules.clientNameFirst.RuleValidator],
+  clientNameLast: ['', mControlRules.clientNameLast.RuleValidator],
+  clientPhone: ['', mControlRules.clientPhone.RuleValidator],
+  clientEmail: ['', mControlRules.clientEmail.RuleValidator],
   agreeRule: [true, mControlRules.agreeRule.RuleValidator],
 };
 
 const etl_normal = {
-  course: [, mControlRules.course.RuleValidator],
+  course: [null, mControlRules.course.RuleValidator],
   clientNameFirst: ['', mControlRules.clientNameFirst.RuleValidator],
   clientNameLast: ['', mControlRules.clientNameLast.RuleValidator],
   clientNameMiddle: ['', ],
