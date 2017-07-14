@@ -22,7 +22,7 @@ export class OrderFormComponent implements OnInit {
   orderForm: FormGroup;
   formSubmitError = false;
 
-  formErrors = {};
+  formErrors: {[k: string]: any} = {};
 
   constructor(private fb: FormBuilder, private httpService: HttpService) {}
 

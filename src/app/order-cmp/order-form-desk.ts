@@ -1,26 +1,20 @@
 interface IFormDesk {
-  Caption: string;
-  Submit: string;
+  submitCaption: string;
 }
 
-let desk: {[id: string]: IFormDesk; };
-desk = {};
+let desk: {[id: string]: IFormDesk; } = {};
 desk['etl'] = {
-  Caption: 'Скачать электронный пробный урок',
-  Submit: 'Скачать пробный урок',
-
+  submitCaption: 'Скачать бесплатно',
 };
 
 desk['tl'] = {
-  Caption: 'Заказать печатный вариант пробного урока',
-  Submit: 'Заказать пробного урока'
+  submitCaption: 'Заказать бесплатно'
 };
 
 export class FormDeskClass {
-  Caption: string;
-  Submit: string;
-  constructor(prFormClass: string) {
-    this.Caption = desk[prFormClass].Caption;
-    this.Submit = desk[prFormClass].Submit;
+  submitCaption: string;
+
+  constructor(formType: string) {
+    this.submitCaption = desk[formType].submitCaption;
   }
 }

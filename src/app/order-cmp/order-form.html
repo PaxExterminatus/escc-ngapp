@@ -1,10 +1,8 @@
 <section class="es-form-section">
-<span class="es-form-label">{{formDesk.Caption}}</span>
 <form
   class="es-form"
-  action="http://dev.office.eshko.net:8080/esccapp/tst/submit.jsp"
-  method="get"
-  target="_blank"
+  action="/orders/create/free_download"
+  method="post"
   novalidate
   (submit)="onSubmit(OrderHTMLForm)"
   [formGroup]="orderForm"
@@ -88,8 +86,7 @@
   </div>
 
   <div class="es-form-field">
-    <button class="btn btn-success es-bnt-submit">{{formDesk.Submit}}</button>
+    <button class="btn btn-success es-bnt-submit">{{formDesk.submitCaption}}</button>
   </div>
-  {{CourseObj | json}}
 </form>
 </section>
