@@ -18,7 +18,9 @@
       (change)="onChangeCourse($event.target.value)">
       <option
         *ngFor="let course of courseObjArr"
-        [value]="course.id">
+        [value]="course.id"
+        [disabled]="course.id === ''"
+      >
         {{course.name}}
       </option>
     </select>
@@ -57,7 +59,7 @@
   </div>
 
   <div class="es-form-field">
-    <label for="phone">Телефон</label>
+    <label for="phone">Телефон<span class="es-label-example">, напрмер 296910330</span></label>
     <div class="input-group"><div class="input-group-addon">+375</div>
       <input
         type="text"
@@ -80,7 +82,10 @@
 
   <div class="es-form-field">
     <div class="checkbox">
-      <label><input type="checkbox" formControlName="agreeRule">Согласиться с правилами</label>
+      <label>
+        <input type="checkbox" formControlName="agreeRule">
+        Для получения информации о новых курсах и проектах я даю согласие на хранение моих персональных данных и отправку e-mail рассылок и SMS
+      </label>
       <app-message-error [msgValue]="formErrors.agreeRule"></app-message-error>
     </div>
   </div>

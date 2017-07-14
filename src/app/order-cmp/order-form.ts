@@ -31,11 +31,12 @@ export class OrderFormComponent implements OnInit {
   }
 
   onSubmit(HTMLForm: HTMLFormElement) {
-
+    this.dataRepair();
     if (this.orderForm.valid) {
+      this.orderForm.get('clientPhone').validator = null;
+      this.orderForm.get('clientPhone').setValue('375' + this.orderForm.get('clientPhone').value);
       HTMLForm.submit();
     } else {
-      this.dataRepair();
       this.dataCheck(true);
       this.formSubmitError = true;
     }

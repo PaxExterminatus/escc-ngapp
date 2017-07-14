@@ -55,11 +55,13 @@ export const mControlRules = {
     RuleValidator: [
       Validators.required,
       Validators.minLength(rule.phoneMinLength),
-      Validators.maxLength(rule.phoneMaxLength)],
+      Validators.maxLength(rule.phoneMaxLength),
+    ],
     ErrorMessage: {
       required: `Пожалуйста, обязательно укажите ваш номер телефона`,
       minlength: `Неверный формат номера телефона, укажите 9 цифр вашего номера, например 296910330`,
-      maxlength: `Неверный формат номера телефона, укажите 9 цифр вашего номера, например 296910330`},
+      maxlength: `Неверный формат номера телефона, укажите 9 цифр вашего номера, например 296910330`,
+    },
     dataRepairReg: [rule.onlyNumber]
       },
   clientEmail: {
