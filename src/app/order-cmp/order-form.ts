@@ -16,6 +16,8 @@ export class OrderFormComponent implements OnInit {
   @Input() formType: string;
   @Input() formClass: string;
   @Input() formCourseInfoType;
+  @Input() formCompact: boolean;
+  controlRules = mControlRules;
   formDesk: FormDeskClass;
   courseObjArr;
   courseObjPick = new CourseClass();

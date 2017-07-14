@@ -4,7 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { AppOrderComponent } from './order-app/order';
+import { AppOrderFormStandartComponent } from './order-app/standart';
+import { AppOrderFormCompactComponent } from './order-app/compact';
 
 import { OrderFormComponent } from './order-cmp/order-form';
 import { CourseInfoComponent } from './form-cmp/course-info';
@@ -13,7 +14,8 @@ import { MessageErrorComponent } from './form-cmp/message-error';
 @NgModule({
   declarations: [
     AppComponent,
-    AppOrderComponent,
+    AppOrderFormStandartComponent,
+    AppOrderFormCompactComponent,
     OrderFormComponent,
     CourseInfoComponent,
     MessageErrorComponent
@@ -24,6 +26,6 @@ import { MessageErrorComponent } from './form-cmp/message-error';
     HttpModule
   ],
   providers: [],
-  bootstrap: [AppComponent, AppOrderComponent] // Делаем селектор приложения доступным из внешних файлов (index.html)
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

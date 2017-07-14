@@ -36,6 +36,7 @@
   display: flex;
   flex-wrap: wrap;
 }
+/*Поля формы*/
 .es-form-field{
   width: 48%;
   margin: 1px 10px 10px 1px;
@@ -51,14 +52,15 @@ option:disabled {
   left: 20px;
   font-size: 1.8rem;
 }
+
 /* Описание полей */
 .es-label-example {
   font-weight: normal;
 }
+
+/* Кнопка отправить */
 .es-bnt-submit{
   display: block;
   margin: auto;
   text-transform: uppercase;
 }
-
-

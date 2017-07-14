@@ -13,10 +13,12 @@ const rule = {
 
 export const mControlRules = {
   course: {
+    label: 'Выберите курс',
     RuleValidator: [Validators.required],
     ErrorMessage: {
       required: 'Обязательно выберите курс'}},
   clientNameFirst: {
+    label: 'Имя',
     RuleValidator: [
       Validators.required,
       Validators.minLength(rule.nameMinLength),
@@ -30,6 +32,7 @@ export const mControlRules = {
     dataRepairReg: [rule.notNumber]
   },
   clientNameLast: {
+    label: 'Фамилия',
     RuleValidator: [
       Validators.required,
       Validators.minLength(rule.nameMinLength),
@@ -41,6 +44,7 @@ export const mControlRules = {
     dataRepairReg: [rule.notNumber]
   },
   clientNameMiddle: {
+    label: 'Отчество',
     RuleValidator: [
       Validators.required,
       Validators.minLength(rule.nameMinLength),
@@ -52,6 +56,7 @@ export const mControlRules = {
     dataRepairReg: [rule.notNumber]
       },
   clientPhone: {
+    label: 'Телефон, например 296910330',
     RuleValidator: [
       Validators.required,
       Validators.minLength(rule.phoneMinLength),
@@ -65,6 +70,7 @@ export const mControlRules = {
     dataRepairReg: [rule.onlyNumber]
       },
   clientEmail: {
+    label: 'Электронная почта',
     RuleValidator: [
       Validators.required,
       Validators.minLength(rule.emailMinLength),
