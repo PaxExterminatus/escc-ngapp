@@ -9,14 +9,15 @@
   #OrderHTMLForm>
 
   <app-course-info *ngIf="formCourseInfoType" [courseObj]="courseObjPick"></app-course-info>
-  <div class="es-form-field es-course-field">
-    <label for="course">{{controlRules.course.label}}</label>
+  <div class="es-form-fld es-fld-course">
+    <label *ngIf="!formCompact" for="course">{{controlRules.course.label}}</label>
     <select
       class="form-control"
       name="course" id="course"
       formControlName="course"
       (change)="onChangeCourse($event.target.value)"
     >
+      <option *ngIf="formCompact" value="null" selected hidden>{{controlRules.course.label}}</option>
       <option
         *ngFor="let course of courseObjArr"
         [value]="course.id"
@@ -28,10 +29,9 @@
     <app-message-error [msgValue]="formErrors.course"></app-message-error>
   </div>
 
-  <div class="es-form-field">
+  <div class="es-form-fld">
     <label *ngIf="!formCompact" for="iname">{{controlRules.clientNameFirst.label}}</label>
-    <input
-      type="text"
+    <input type="text"
       name="iname" id="iname"
       formControlName="clientNameFirst"
       class="form-control"
@@ -40,10 +40,9 @@
     <app-message-error [msgValue]="formErrors.clientNameFirst"></app-message-error>
   </div>
 
-  <div class="es-form-field">
+  <div class="es-form-fld">
     <label *ngIf="!formCompact" for="fname">{{controlRules.clientNameLast.label}}</label>
-    <input
-      type="text"
+    <input type="text"
       name="fname" id="fname"
       formControlName="clientNameLast"
       class="form-control"
@@ -52,10 +51,9 @@
     <app-message-error [msgValue]="formErrors.clientNameLast"></app-message-error>
   </div>
 
-  <div class="es-form-field" *ngIf="orderForm.controls.clientNameMiddle">
+  <div class="es-form-fld" *ngIf="orderForm.controls.clientNameMiddle">
     <label *ngIf="!formCompact" for="mname">{{controlRules.clientNameMiddle.label}}</label>
-    <input
-      type="text"
+    <input type="text"
       name="mname" id="mname"
       formControlName="clientNameMiddle"
       class="form-control"
@@ -64,11 +62,10 @@
     <app-message-error [msgValue]="formErrors.clientNameMiddle"></app-message-error>
   </div>
 
-  <div class="es-form-field">
+  <div class="es-form-fld">
     <label *ngIf="!formCompact" for="phone">{{controlRules.clientPhone.label}}</label>
     <div class="input-group"><div class="input-group-addon">+375</div>
-      <input
-        type="text"
+      <input type="tel"
         name="phone" id="phone"
         formControlName="clientPhone"
         class="form-control"
@@ -78,10 +75,9 @@
     <app-message-error [msgValue]="formErrors.clientPhone"></app-message-error>
   </div>
 
-  <div class="es-form-field">
+  <div class="es-form-fld">
     <label *ngIf="!formCompact" for="email">{{controlRules.clientEmail.label}}</label>
-    <input
-      type="text"
+    <input type="email"
       name="email" id="email"
       formControlName="clientEmail"
       class="form-control"
@@ -90,7 +86,7 @@
     <app-message-error [msgValue]="formErrors.clientEmail"></app-message-error>
   </div>
 
-  <div class="es-form-field">
+  <div class="es-form-fld es-fld-agree">
     <div class="checkbox">
       <label>
         <input type="checkbox" formControlName="agreeRule">
@@ -100,7 +96,7 @@
     </div>
   </div>
 
-  <div class="es-form-field">
+  <div class="es-form-fld es-fld-submit">
     <button class="btn btn-success es-bnt-submit"><i class="fa fa-download"></i> {{formDesk.submitCaption}}</button>
   </div>
 </form>

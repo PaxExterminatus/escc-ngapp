@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-ofstandart',
+  selector: 'app-standart',
   templateUrl: 'standart.html'
 })
 

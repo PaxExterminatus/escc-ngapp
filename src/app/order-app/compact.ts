@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-ofcompact',
+  selector: 'app-compact',
   templateUrl: 'compact.html'
 })
 

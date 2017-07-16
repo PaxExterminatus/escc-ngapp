@@ -17,7 +17,8 @@
 
 /*Сообщения об ошибках*/
 .es-message{
-  padding: 10px;
+  /*padding: 8px; /* Стандартная форма */
+  padding: 4px 8px 3px 8px; /* Компактная форма */
   border-radius: 6px;
   font-size: 1.25rem;
 }
@@ -37,30 +38,33 @@
   flex-wrap: wrap;
 }
 /*Поля формы*/
-.es-form-field{
-  width: 48%;
+.es-form-fld{
+  flex-basis: 48%; /*flex-true*/
+  width: 100%; /*flex-false*/
   margin: 1px 10px 10px 1px;
   flex-grow: 1;
 }
 /* Поле выбора курса*/
-.es-course-field {
-  width: 100%;
+.es-fld-course {
+  flex-basis: 100%; /*flex-true*/
+  /*width: 100%; /*flex-false*/
+}
+.es-fld-fname{}
+.es-fld-lname{}
+.es-fld-mname{}
+.es-fld-phone{}
+.es-fld-email{}
+.es-fld-agree{}
+.es-fld-submit{
+  flex-basis: 1%;
 }
 option:disabled {
   font-weight: bold;
   color: #7B241C;
-  left: 20px;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
-
-/* Описание полей */
-.es-label-example {
-  font-weight: normal;
-}
-
 /* Кнопка отправить */
 .es-bnt-submit{
   display: block;
   margin: auto;
-  text-transform: uppercase;
 }

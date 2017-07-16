@@ -25,7 +25,7 @@ export const mControlRules = {
       Validators.maxLength(rule.nameMaxLength),
     ],
     ErrorMessage: {
-      required: `Пожалуйста, обязательно укажите ваше имя`,
+      required: `Пожалуйста, укажите ваше имя`,
       minlength: `Минимальное количество символов в имени: ${rule.nameMinLength}`,
       maxlength: `Максимальное количество символов в имене: ${rule.nameMaxLength}`,
     },
@@ -38,7 +38,7 @@ export const mControlRules = {
       Validators.minLength(rule.nameMinLength),
       Validators.maxLength(rule.nameMaxLength)],
     ErrorMessage: {
-      required: `Пожалуйста, обязательно укажите вашу фамилию`,
+      required: `Пожалуйста, укажите вашу фамилию`,
       minlength: `Минимальное количество символов в фамилии: ${rule.nameMinLength}`,
       maxlength: `Максимальное количество символов в фамилии: ${rule.nameMaxLength}`},
     dataRepairReg: [rule.notNumber]
@@ -50,7 +50,7 @@ export const mControlRules = {
       Validators.minLength(rule.nameMinLength),
       Validators.maxLength(rule.nameMaxLength)],
     ErrorMessage: {
-      required: `Пожалуйста, обязательно укажите ваше отчество`,
+      required: `Пожалуйста, укажите ваше отчество`,
       minlength: `Минимальное количество символов в отчестве: ${rule.nameMinLength}`,
       maxlength: `Максимальное количество символов в отчестве: ${rule.nameMaxLength}`},
     dataRepairReg: [rule.notNumber]
@@ -63,7 +63,7 @@ export const mControlRules = {
       Validators.maxLength(rule.phoneMaxLength),
     ],
     ErrorMessage: {
-      required: `Пожалуйста, обязательно укажите ваш номер телефона`,
+      required: `Пожалуйста, укажите ваш номер телефона`,
       minlength: `Неверный формат номера телефона, укажите 9 цифр вашего номера, например 296910330`,
       maxlength: `Неверный формат номера телефона, укажите 9 цифр вашего номера, например 296910330`,
     },
@@ -78,7 +78,7 @@ export const mControlRules = {
       Validators.email,
     ],
     ErrorMessage: {
-      required: `Пожалуйста, обязательно укажите адрес вашей электронной почты`,
+      required: `Пожалуйста, укажите адрес вашей электронной почты`,
       minlength: `Проверьте введенный адрес электронной почты`,
       maxlength: `Проверьте введенный адрес электронной почты`,
       email: `Проверьте введенный адрес электронной почты`,

@@ -1,2 +1,2 @@
-<!--<app-ofstandart></app-ofstandart>-->
-<app-ofcompact></app-ofcompact>
+<app-compact *ngIf="type === 'compact'"></app-compact>
+<app-standart *ngIf="type === 'standart'"></app-standart>
