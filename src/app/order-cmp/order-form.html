@@ -1,4 +1,4 @@
-<section class="es-form-section">
+<div class="es-form-div">
 <form
   class="es-form"
   action="/orders/create/free_download"
@@ -13,7 +13,7 @@
     <label *ngIf="!formCompact" for="course">{{controlRules.course.label}}</label>
     <select
       class="form-control"
-      name="course" id="course"
+      name="kurs" id="course"
       formControlName="course"
       (change)="onChangeCourse($event.target.value)"
     >
@@ -97,7 +97,7 @@
   </div>
 
   <div class="es-form-fld es-fld-submit">
-    <button class="btn btn-success es-bnt-submit"><i class="fa fa-download"></i> {{formDesk.submitCaption}}</button>
+    <button class="btn es-bnt-submit"><i class="fa fa-download"></i> {{formDesk.submitCaption}}</button>
   </div>
 </form>
-</section>
+</div>

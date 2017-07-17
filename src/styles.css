@@ -1,5 +1,5 @@
 /*Секция формы*/
-.es-form-section{
+.es-form-div{
   padding: 20px 5px 20px 5px;
   width: 100%;
   /*border: solid 1px red;*/
@@ -67,4 +67,10 @@ option:disabled {
 .es-bnt-submit{
   display: block;
   margin: auto;
+  color: #FFF;
+  background-color: #449d44;
+}
+.es-bnt-submit:hover{
+  color: #FFF;
+  background-color: #217c21;
 }
