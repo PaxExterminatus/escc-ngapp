@@ -1,7 +1,7 @@
 <div class="es-form-div">
 <form
   class="es-form"
-  action="/orders/create/free_download"
+  [action]="formAction"
   method="post"
   novalidate
   (submit)="onSubmit(OrderHTMLForm)"
@@ -9,15 +9,15 @@
   #OrderHTMLForm>
 
   <app-course-info *ngIf="formCourseInfoType" [courseObj]="courseObjPick"></app-course-info>
-  <div class="es-form-fld es-fld-course">
-    <label *ngIf="!formCompact" for="course">{{controlRules.course.label}}</label>
+  <div class="es-form-fld es-fld-course" *ngIf="useCourseList()">
+    <label *ngIf="!usePlaceholder()" for="course">{{controlRules.course.label}}</label>
     <select
       class="form-control"
       name="kurs" id="course"
       formControlName="course"
       (change)="onChangeCourse($event.target.value)"
     >
-      <option *ngIf="formCompact" value="null" selected hidden>{{controlRules.course.label}}</option>
+      <option *ngIf="usePlaceholder()" value="null" selected hidden>{{controlRules.course.label}}</option>
       <option
         *ngFor="let course of courseObjArr"
         [value]="course.id"
@@ -30,58 +30,58 @@
   </div>
 
   <div class="es-form-fld">
-    <label *ngIf="!formCompact" for="iname">{{controlRules.clientNameFirst.label}}</label>
+    <label *ngIf="!usePlaceholder()" for="iname">{{controlRules.clientNameFirst.label}}</label>
     <input type="text"
       name="iname" id="iname"
       formControlName="clientNameFirst"
       class="form-control"
-      placeholder = "{{formCompact?controlRules.clientNameFirst.label:''}}"
+      placeholder = "{{usePlaceholder()?controlRules.clientNameFirst.label:''}}"
     >
     <app-message-error [msgValue]="formErrors.clientNameFirst"></app-message-error>
   </div>
 
   <div class="es-form-fld">
-    <label *ngIf="!formCompact" for="fname">{{controlRules.clientNameLast.label}}</label>
+    <label *ngIf="!usePlaceholder()" for="fname">{{controlRules.clientNameLast.label}}</label>
     <input type="text"
       name="fname" id="fname"
       formControlName="clientNameLast"
       class="form-control"
-      placeholder = "{{formCompact?controlRules.clientNameLast.label:''}}"
+      placeholder = "{{usePlaceholder()?controlRules.clientNameLast.label:''}}"
     >
     <app-message-error [msgValue]="formErrors.clientNameLast"></app-message-error>
   </div>
 
   <div class="es-form-fld" *ngIf="orderForm.controls.clientNameMiddle">
-    <label *ngIf="!formCompact" for="mname">{{controlRules.clientNameMiddle.label}}</label>
+    <label *ngIf="!usePlaceholder()" for="mname">{{controlRules.clientNameMiddle.label}}</label>
     <input type="text"
       name="mname" id="mname"
       formControlName="clientNameMiddle"
       class="form-control"
-      placeholder = "{{formCompact?controlRules.clientNameMiddle.label:''}}"
+      placeholder = "{{usePlaceholder()?controlRules.clientNameMiddle.label:''}}"
     >
     <app-message-error [msgValue]="formErrors.clientNameMiddle"></app-message-error>
   </div>
 
   <div class="es-form-fld">
-    <label *ngIf="!formCompact" for="phone">{{controlRules.clientPhone.label}}</label>
+    <label *ngIf="!usePlaceholder()" for="phone">{{controlRules.clientPhone.label}}</label>
     <div class="input-group"><div class="input-group-addon">+375</div>
       <input type="tel"
         name="mphone" id="phone"
         formControlName="clientPhone"
         class="form-control"
-        placeholder = "{{formCompact?controlRules.clientPhone.label:''}}"
+        placeholder = "{{usePlaceholder()?controlRules.clientPhone.label:''}}"
       >
     </div>
     <app-message-error [msgValue]="formErrors.clientPhone"></app-message-error>
   </div>
 
   <div class="es-form-fld">
-    <label *ngIf="!formCompact" for="email">{{controlRules.clientEmail.label}}</label>
+    <label *ngIf="!usePlaceholder()" for="email">{{controlRules.clientEmail.label}}</label>
     <input type="email"
       name="email" id="email"
       formControlName="clientEmail"
       class="form-control"
-      placeholder = "{{formCompact?controlRules.clientEmail.label:''}}"
+      placeholder = "{{usePlaceholder()?controlRules.clientEmail.label:''}}"
     >
     <app-message-error [msgValue]="formErrors.clientEmail"></app-message-error>
   </div>

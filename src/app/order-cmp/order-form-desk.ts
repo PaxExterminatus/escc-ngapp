@@ -1,17 +1,19 @@
+import {CONST} from '../CONST';
+
 interface IFormDesk {
   submitCaption: string;
 }
 
 let desk: {[id: string]: IFormDesk; } = {};
-desk['etl'] = {
+desk[CONST.ORDER_ETL] = {
   submitCaption: 'Скачать бесплатно',
 };
 
-desk['tl'] = {
-  submitCaption: 'Заказать бесплатно'
+desk[CONST.ORDER_DEMO] = {
+  submitCaption: 'Получить доступ'
 };
 
-export class FormDeskClass {
+export class FormDescription {
   submitCaption: string;
 
   constructor(formType: string) {

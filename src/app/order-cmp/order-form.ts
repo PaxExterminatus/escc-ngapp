@@ -3,8 +3,10 @@ import {FormGroup, FormBuilder} from '@angular/forms';
 import { Response } from '@angular/http';
 
 import { CourseClass, mControlRules } from '../order-model/form';
-import { FormDeskClass } from './order-form-desk';
+import { FormDescription } from './order-form-desk';
 import { HttpService } from '../form-service/http.service';
+
+import {CONST} from '../CONST';
 
 @Component({
   selector: 'app-order-form',
@@ -13,23 +15,44 @@ import { HttpService } from '../form-service/http.service';
 })
 
 export class OrderFormComponent implements OnInit {
-  @Input() formType: string;
-  @Input() formClass: string;
+  @Input() formStyle: string;
+  @Input() orderType: string;
   @Input() formCourseInfoType;
-  @Input() formCompact: boolean;
   controlRules = mControlRules;
-  formDesk: FormDeskClass;
+  formDesk: FormDescription;
   courseObjArr;
   courseObjPick = new CourseClass();
   orderForm: FormGroup;
   formSubmitError = false;
-
+  formAction: string;
   formErrors: {[k: string]: any} = {};
 
   constructor(private fb: FormBuilder, private httpService: HttpService) {}
 
   onChangeCourse(e: any) {
     this.courseObjPick = this.courseObjArr.find(course => course.id === e);
+  }
+
+  isDemo(): Boolean {
+    return (this.orderType === CONST.ORDER_DEMO);
+  }
+  isEtl(): Boolean {
+    return (this.orderType === CONST.ORDER_ETL);
+  }
+  isDemoCompact(): Boolean {
+    return (this.orderType === CONST.ORDER_DEMO && this.formStyle === CONST.STYLE_COMPACT);
+  }
+  isEtlCompact(): Boolean {
+    return (this.orderType === CONST.ORDER_ETL && this.formStyle === CONST.STYLE_COMPACT);
+  }
+  isEtlStandart(): Boolean {
+    return (this.orderType === CONST.ORDER_ETL && this.formStyle === CONST.STYLE_STANDARD);
+  }
+  useCourseList(): Boolean {
+    return !this.isDemoCompact();
+  }
+  usePlaceholder(): Boolean {
+    return (this.formStyle === CONST.STYLE_COMPACT);
   }
 
   onSubmit(HTMLForm: HTMLFormElement) {
@@ -45,29 +68,31 @@ export class OrderFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initFormType(); // Список элементов управления
-    this.initFormClass(); // Описание формы
+    this.initForm(); // Инициализация формы
     this.orderForm.valueChanges.subscribe(data => this.onValueChanged()); // Подписка на данные формы
     this.httpService.getCoursesList().subscribe((data: Response) => this.courseObjArr = data.json());
   }
 
-  initFormType() {
-    if (this.formClass === 'etl') {
-
-      if (this.formType === 'short') {
-        this.orderForm = this.fb.group(etl_short);
-      } else if (this.formType === 'normal') {
-        this.orderForm = this.fb.group(etl_normal);
-      }
+  initForm() {
+    if (this.isDemo()) {
+      this.formAction = 'http://www.eshko.by/orders/create/demo';
+    } else if (this.isEtl()) {
+      this.formAction = 'http://www.eshko.by/orders/create/free_download';
     }
-  }
 
-  initFormClass() {
-    this.formDesk = new FormDeskClass(this.formClass);
+    if (this.isEtlCompact()) {
+      this.orderForm = this.fb.group(etl_compact);
+    } else if (this.isEtlStandart()) {
+      this.orderForm = this.fb.group(etl_standard);
+    } else if (this.isDemoCompact()) {
+      this.orderForm = this.fb.group(demo_compact);
+    }
+
+    this.formDesk = new FormDescription(this.orderType);
   }
 
   dataCheck(chkAll?: boolean) { // Валидация данных и вывод сообщений об ошибках
-    this.formErrors = {}; //new Object(); // Обнуляем список ошибок
+    this.formErrors = {}; // Обнуляем список ошибок
     for (const controlName in this.orderForm.controls) {
       const controlObj = this.orderForm.get(controlName);
       if ((controlObj.invalid && (controlObj.dirty || controlObj.touched)) || chkAll || this.formSubmitError ) {
@@ -95,7 +120,7 @@ export class OrderFormComponent implements OnInit {
   }
 }
 
-const etl_short = {
+const etl_compact = {
   course: [null, mControlRules.course.RuleValidator],
   clientNameFirst: ['', mControlRules.clientNameFirst.RuleValidator],
   clientNameLast: ['', mControlRules.clientNameLast.RuleValidator],
@@ -104,11 +129,19 @@ const etl_short = {
   agreeRule: [true, mControlRules.agreeRule.RuleValidator],
 };
 
-const etl_normal = {
+const etl_standard = {
   course: [null, mControlRules.course.RuleValidator],
   clientNameFirst: ['', mControlRules.clientNameFirst.RuleValidator],
   clientNameLast: ['', mControlRules.clientNameLast.RuleValidator],
   clientNameMiddle: ['', ],
+  clientPhone: ['', mControlRules.clientPhone.RuleValidator],
+  clientEmail: ['', mControlRules.clientEmail.RuleValidator],
+  agreeRule: [true, mControlRules.agreeRule.RuleValidator],
+};
+
+const demo_compact = {
+  clientNameFirst: ['', mControlRules.clientNameFirst.RuleValidator],
+  clientNameLast: ['', mControlRules.clientNameLast.RuleValidator],
   clientPhone: ['', mControlRules.clientPhone.RuleValidator],
   clientEmail: ['', mControlRules.clientEmail.RuleValidator],
   agreeRule: [true, mControlRules.agreeRule.RuleValidator],
