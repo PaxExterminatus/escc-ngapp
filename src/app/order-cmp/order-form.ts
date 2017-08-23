@@ -75,7 +75,7 @@ export class OrderFormComponent implements OnInit {
 
   initForm() {
     if (this.isDemo()) {
-      this.formAction = 'http://www.eshko.by/orders/create/demo';
+      this.formAction = 'http://www.eshko.by/orders/create/demo_materials';
     } else if (this.isEtl()) {
       this.formAction = 'http://www.eshko.by/orders/create/free_download';
     }
@@ -140,6 +140,7 @@ const etl_standard = {
 };
 
 const demo_compact = {
+  course: [null, null],
   clientNameFirst: ['', mControlRules.clientNameFirst.RuleValidator],
   clientNameLast: ['', mControlRules.clientNameLast.RuleValidator],
   clientPhone: ['', mControlRules.clientPhone.RuleValidator],
