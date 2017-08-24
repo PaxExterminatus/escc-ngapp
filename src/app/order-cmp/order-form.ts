@@ -75,9 +75,9 @@ export class OrderFormComponent implements OnInit {
 
   initForm() {
     if (this.isDemo()) {
-      this.formAction = 'http://www.eshko.by/orders/create/lessons';
+      this.formAction = '/orders/create/lessons';
     } else if (this.isEtl()) {
-      this.formAction = 'http://www.eshko.by/orders/create/free_download';
+      this.formAction = '/orders/create/free_download';
     }
 
     if (this.isEtlCompact()) {
