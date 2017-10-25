@@ -8,6 +8,6 @@ export class HttpService {
   constructor(private http: Http) {}
 
   getCoursesList() {
-    return this.http.get('http://www.eshko.by/api/list/course');
+    return this.http.get('https://www.eshko.by/api/list/course');
   }
 }
